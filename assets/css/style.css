@@ -1,3 +1,10 @@
+#banner {
+    background: linear-gradient(
+        90deg, #000000 0%, white 0%, rgba(0, 0, 0, 0.35) 0%), url("../images/banner-1.jpg") no-repeat center / cover;
+        height: 65vh;
+}
+
+
 .bg-primary {
     background-color: #fcd132 !important;
 }
@@ -60,5 +67,15 @@
         position: absolute;
         top: 30px;
         right: 4px;
+    }
+}
+
+@media (max-width: 425px) {
+    #banner {
+        height: 35vh;
+    }
+
+    #banner .display-3 {
+        font-size: 3rem;
     }
 }
