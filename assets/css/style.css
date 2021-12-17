@@ -115,6 +115,10 @@
         top: 30px;
         right: 4px;
     }
+
+    .filter.border-right {
+        border: 0;
+    }
 }
 
 @media (max-width: 425px) {
