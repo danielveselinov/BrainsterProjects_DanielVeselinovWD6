@@ -4,9 +4,8 @@
         height: 65vh;
 }
 
-
 .bg-primary {
-    background-color: #fcd132 !important;
+    background-color: #FCD132 !important;
 }
 
 .toggle-mobile-icon {
@@ -16,6 +15,15 @@
 .mobile-nav {
     display: none;
 }
+
+/* filter design */
+.filter {
+    cursor: pointer;
+}
+.active {
+    background-color: #DC3545 !important;
+}
+
 
 @media (max-width: 768px) {
     .nav-content {
