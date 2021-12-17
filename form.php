@@ -14,14 +14,83 @@
         <!-- Latest Font-Awesome CDN -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 
-        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="./assets/css/style.css">
     </head>
     <body>
+        <!-- Default navbar laptop and more -->
+        <nav class="d-flex justify-content-between align-items-center bg-primary">
+            <a href="./home" class="nav-link ml-5">
+                <div class="d-flex justify-content-center">
+                    <div class="d-block">
+                        <img src="./assets/images/logo.png" class="logo" alt="Brainster Logo">
+                        <p class="small font-weight-bold text-dark text-uppercase mb-0">brainster</p>
+                    </div>
+                </div>
+            </a>
+            <div class="nav-content">
+                <ul class="d-flex align-items-center font-weight-bold list-unstyled mb-0">
+                    <li class="nav-link mr-md-0 mr-lg-5">
+                        <a class="text-dark" href="https://brainster.co/marketing/">Академија за маркетинг</a>
+                    </li>
+                    <li class="nav-link mr-md-0 mr-lg-5">
+                        <a class="text-dark" href="https://brainster.co/full-stack/">Академија за програмирање</a>
+                    </li>
+                    <li class="nav-link mr-md-0 mr-lg-5">
+                        <a class="text-dark" href="https://brainster.co/data-science/">Академија за data science</a>
+                    </li>
+                    <li class="nav-link mr-md-0 mr-lg-5">
+                        <a class="text-dark" href="https://brainster.co/graphic-design/">Академија за дизајн</a>
+                    </li>
+                    <li class="nav-link mr-md-0 mr-lg-5">
+                        <a href="./form" class="btn btn-danger font-weight-bold">Вработи наш студент</a>
+                    </li>
+                </ul>
+            </div>
+            <button onclick="toggleSidebar()" class="toggle-mobile-icon mr-5"><span></span><span></span><span></span></button>
+        </nav>
+        <!-- Initaliznig mobile navbar -->
+        <div class="mobile-nav bg-dark">
+            <div class="mobile-content py-5 position-relative">
+                <button onclick="toggleSidebar()" class="toggle-mobile-icon text-light mr-5"><i class="fas fa-times fa-3x"></i></button>
+                <ul class="d-flex flex-column align-items-start list-unstyled font-weight-bold py-5">
+                    <li class="nav-link mb-2">
+                        <a href="https://brainster.co/marketing/" class="text-light">Академија за маркетинг</a>
+                    </li>
+                    <li class="nav-link mb-2">
+                        <a href="https://brainster.co/full-stack/" class="text-light">Академија за програмирање</a>
+                    </li>
+                    <li class="nav-link mb-2">
+                        <a href="https://brainster.co/data-science/" class="text-light">Академија за data science</a>
+                    </li>
+                    <li class="nav-link mb-2">
+                        <a href="https://brainster.co/graphic-design/" class="text-light">Академија за дизајн</a>
+                    </li>
+                    <li class="nav-link mb-2">
+                        <a href="./form" class="btn btn-danger font-weight-bold">Вработи наш студент</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Banner initialization -->
+        <div class="container-fluid bg-yellow">
+            <div class="d-flex justify-content-center align-items-center py-5">
+                <p class="display-3 text-capitalize text-dark font-weight-bold mb-0 py-5">Вработи студенти</p>
+            </div>
+
+            
+        </div>
+        
+
         
         
-        
+        <!-- Footer initialization -->
+        <footer class="bg-dark text-light text-center">
+            <p class="font-weight-bold p-3 mb-0">Изработено со <span class="text-danger">&hearts;</span> од студентите на Brainster</p>
+        </footer>
+
         <!-- jQuery library -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <!-- custom JavaScript intalize -->
         <script src="./assets/js/main.js"></script>
         <!-- Latest Compiled Bootstrap 4.4.1 JavaScript -->

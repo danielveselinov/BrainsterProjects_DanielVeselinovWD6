@@ -31,6 +31,10 @@
     background-color: #FCD132 !important;
 }
 
+.bg-yellow {
+    background-color: #f7c925;
+}
+
 .toggle-mobile-icon {
     display: none;
 }
