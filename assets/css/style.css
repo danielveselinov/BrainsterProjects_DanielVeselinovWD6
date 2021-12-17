@@ -4,9 +4,8 @@
         height: 65vh;
 }
 
-
 .bg-primary {
-    background-color: #fcd132 !important;
+    background-color: #FCD132 !important;
 }
 
 .toggle-mobile-icon {
@@ -16,6 +15,37 @@
 .mobile-nav {
     display: none;
 }
+
+/* filter design */
+.filter {
+    cursor: pointer;
+}
+.active {
+    background-color: #DC3545 !important;
+}
+
+/* cards style */
+.card {
+    cursor: pointer;
+    background-color: white;
+    box-shadow: 0px 0px 8px 2px rgba(184,184,184,0.75);
+    transition: all .6s;
+}
+
+.card:hover {
+    background-color: antiquewhite;
+    transform: rotate(1turn);
+  }
+
+.rounded-10 {
+    border-radius: 10px;
+}
+
+.rounded-img-10 {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
 
 @media (max-width: 768px) {
     .nav-content {
