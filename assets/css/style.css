@@ -1,3 +1,20 @@
+/* custom scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: #DC3545; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #FCD132; 
+}
+
 #banner {
     background: linear-gradient(
         90deg, #000000 0%, white 0%, rgba(0, 0, 0, 0.35) 0%), url("../images/banner-1.jpg") no-repeat center / cover;
