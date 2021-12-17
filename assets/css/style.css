@@ -21,6 +21,12 @@
         height: 65vh;
 }
 
+.logo {
+    display: block;
+    width: 50px;
+    margin: auto;
+}
+
 .bg-primary {
     background-color: #FCD132 !important;
 }
@@ -61,6 +67,10 @@
 .rounded-img-10 {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+}
+
+footer span {
+    font-size: 18px;
 }
 
 
