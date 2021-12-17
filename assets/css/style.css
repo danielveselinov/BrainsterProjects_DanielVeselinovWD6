@@ -1,3 +1,64 @@
 .bg-primary {
     background-color: #fcd132 !important;
 }
+
+.toggle-mobile-icon {
+    display: none;
+}
+
+.mobile-nav {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .nav-content {
+        display: none;
+    }
+
+    .mobile-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        z-index: 1;
+        transition: all .1s ease-in-out;
+    }
+
+    .toggle-mobile-icon {
+        display: flex;
+        width: 70px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        /* resets */
+        border: none;
+        background: none;
+    }
+    
+    .toggle-mobile-icon:hover {
+        cursor: pointer;
+    }
+      
+    .toggle-mobile-icon span {
+        width: 100%;
+        height: 6px;
+        border-radius: 3px;
+        background-color: #302f38;
+        margin: 3px;
+    }
+    
+    .toggle-mobile-icon span:nth-child(2) {
+        width: 75%;
+    }
+    
+    .toggle-mobile-icon span:nth-child(3) {
+        width: 50%;
+    }
+
+    .position-relative .toggle-mobile-icon {
+        position: absolute;
+        top: 30px;
+        right: 4px;
+    }
+}

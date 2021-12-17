@@ -1,5 +1,5 @@
 RewriteEngine on
 
 RewriteRule ^home index.html [NC,L]
-RewriteRule ^form form.html [NC,L]
+RewriteRule ^form form.php [NC,L]
 RewriteRule ^clients clients.php [NC,L]
