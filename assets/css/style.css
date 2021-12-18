@@ -77,8 +77,14 @@
     font-style: italic !important;
 }
 
-.form-row .dropdown {
-    cursor: pointer;
+.form-row .custom-select-lg {
+    height: 58px;
+    background: #fff url("../images/chevron-down-solid.svg") right 0.75rem center/26px 18px no-repeat;
+    font-size: 1rem !important;
+}
+
+.custom-b-padding {
+    padding-bottom: 25vh;
 }
 
 footer span {

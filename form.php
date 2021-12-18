@@ -79,8 +79,8 @@
             </div>
 
             <!-- Form initialization -->
-            <div class="container">
-                <form action="#" method="POST" class="my-5">
+            <div class="container custom-b-padding">
+                <form action="#" method="POST" class="py-4">
                     <div class="form-row">
                         <div class="col-12 col-md">
                             <label class="font-weight-bold" for="full_name">Име и Презиме</label>
@@ -104,16 +104,12 @@
                     <div class="form-row mt-3">
                         <div class="col-12 col-md">
                             <label class="font-weight-bold" for="dropdownMenuButton">Тип на студент</label>
-                            <div class="dropdown">
-                                <div id="dropdownMenuButton" class="d-flex justify-content-between align-items-center p-3 bg-light rounded font-weight-bold" data-toggle="dropdown">
-                                    Изберете тип на студент
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                                <div class="dropdown-menu w-100" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item border-bottom py-2 font-weight-bold" href="#">Студенти од маркетинг</a>
-                                    <a class="dropdown-item border-bottom py-2 font-weight-bold" href="#">Студенти од маркетинг</a>
-                                </div>
-                            </div>
+                            <select class="custom-select custom-select-lg font-weight-bold" id="inputGroupSelect01">
+                                <option selected>Изберете тип на студент</option>
+                                <option value="1">Студенти од маркетинг</option>
+                                <option value="2">Студенти од маркетинг</option>
+                                <option value="3">Студенти од маркетинг</option>
+                            </select>
                         </div>
                         <div class="col-12 col-md">
                             <label class="invisible">испрати форма</label>
