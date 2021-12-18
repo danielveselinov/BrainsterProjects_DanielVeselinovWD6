@@ -49,6 +49,14 @@
     display: none;
 }
 
+.animation {
+    transition: transform 250ms !important;
+}
+
+.animation:hover {
+    transform: translateY(-10px) !important;
+}
+
 /* filter design */
 .filter {
     cursor: pointer;
@@ -67,7 +75,8 @@
 
 .card:hover {
     background-color: antiquewhite;
-    transform: rotate(1turn);
+    /* transform: rotate(1turn); */
+    transform: translateY(-10px);
   }
 
 .rounded-10 {
