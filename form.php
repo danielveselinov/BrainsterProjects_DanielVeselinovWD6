@@ -1,3 +1,4 @@
+<?php include "./source/connection.php" ?>
 <!doctype html>
 <html>
     <head>
@@ -16,7 +17,37 @@
 
         <link rel="stylesheet" href="./assets/css/style.css">
     </head>
-    <body class="d-flex flex-column justify-content-between vh-100 bg-yellow">
+    <body class="d-flex flex-column justify-content-between vh-100 bg-yellow position-relative">
+        <!-- Alert after submitting the form -->
+        <?php 
+            if (isset($_GET['true'])) {
+                echo '
+                <div class="alert alert-success alert-dismissible fade show position-fixed" role="alert">
+                    <strong>Честитки!</strong> Вашето барање е регистрирано база и ќе биде процесирано наскоро
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>';
+            }
+            else if (isset($_GET['false'])) {
+                echo '
+                <div class="alert alert-warning alert-dismissible fade show position-fixed" role="alert">
+                    <strong>Грешка!</strong> Неуспешен обид за испраќање на податоците до серверот
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>';
+            }
+            else if (isset($_GET['false-course'])) {
+                echo '
+                <div class="alert alert-warning alert-dismissible fade show position-fixed" role="alert">
+                    <strong>Грешка!</strong> Задолжително е да одберете ставка од полето Тип на студент
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>';
+            }
+        ?>
         <!-- Default navbar laptop and more -->
         <nav class="d-flex justify-content-between align-items-center bg-primary">
             <a href="./home" class="nav-link ml-5">
@@ -80,35 +111,41 @@
 
             <!-- Form initialization -->
             <div class="container custom-b-padding">
-                <form action="./source/connection.php" method="POST" class="py-4">
+                <form action="./source/process.php" method="POST" class="py-4">
                     <div class="form-row">
                         <div class="col-12 col-md">
                             <label class="font-weight-bold" for="full_name">Име и Презиме</label>
-                            <input type="text" class="form-control p-4" id="full_name" name="full_name" placeholder="Вашето име и презиме">
+                            <input type="text" class="form-control p-4" id="full_name" name="full_name" placeholder="Вашето име и презиме" required>
                         </div>
                         <div class="col-12 col-md">
                             <label class="font-weight-bold" for="company_name">Име на компанија</label>
-                            <input type="text" class="form-control p-4" id="company_name" name="company_name" placeholder="Име на вашата компанија">
+                            <input type="text" class="form-control p-4" id="company_name" name="company_name" placeholder="Име на вашата компанија" required>
                         </div>
                     </div>
                     <div class="form-row mt-3">
                         <div class="col-12 col-md">
                             <label class="font-weight-bold" for="company_email">Контакт имејл</label>
-                            <input type="email" class="form-control p-4" id="company_email" name="company_email" placeholder="Контакт имејл на вашата компанија">
+                            <input type="email" class="form-control p-4" id="company_email" name="company_email" placeholder="Контакт имејл на вашата компанија" required>
                         </div>
                         <div class="col-12 col-md">
                             <label class="font-weight-bold" for="company_mobile">Контакт телефон</label>
-                            <input type="text" class="form-control p-4" id="company_mobile" name="company_mobile" placeholder="Контакт телефон на вашата компанија">
+                            <input type="text" class="form-control p-4" id="company_mobile" name="company_mobile" placeholder="Контакт телефон на вашата компанија" required>
                         </div>
                     </div>
                     <div class="form-row mt-3">
                         <div class="col-12 col-md">
                             <label class="font-weight-bold" for="dropdownMenuButton">Тип на студент</label>
-                            <select class="custom-select custom-select-lg font-weight-bold" id="inputGroupSelect01">
-                                <option selected>Изберете тип на студент</option>
-                                <option value="1">Студенти од маркетинг</option>
-                                <option value="2">Студенти од маркетинг</option>
-                                <option value="3">Студенти од маркетинг</option>
+                            <select class="custom-select custom-select-lg font-weight-bold" id="type_of_student" name="type_of_student" required>
+                                <option selected disabled>Изберете тип на студент</option>
+                                <?php 
+                                    $fetch = mysqli_query($SQL, "SELECT * FROM courses");
+
+                                    if (mysqli_num_rows($fetch) > 0) {
+                                        while ($courses = mysqli_fetch_assoc($fetch)) { ?>
+                                            <option value="<?php echo $courses["id"]; ?>"><?php echo $courses["course"]; ?></option>
+                                       <?php }
+                                    }
+                                ?>
                             </select>
                         </div>
                         <div class="col-12 col-md">
