@@ -80,7 +80,7 @@
 
             <!-- Form initialization -->
             <div class="container custom-b-padding">
-                <form action="#" method="POST" class="py-4">
+                <form action="./source/connection.php" method="POST" class="py-4">
                     <div class="form-row">
                         <div class="col-12 col-md">
                             <label class="font-weight-bold" for="full_name">Име и Презиме</label>
@@ -113,7 +113,7 @@
                         </div>
                         <div class="col-12 col-md">
                             <label class="invisible">испрати форма</label>
-                            <button id="btn_submit" name="btn_submit" type="submit" class="btn btn-danger font-weight-bold text-uppercase btn-block p-3">испрати</button>
+                            <button id="btn_submit" name="hire_student" type="submit" class="btn btn-danger font-weight-bold text-uppercase btn-block p-3">испрати</button>
                         </div>
                     </div>
                 </form>
