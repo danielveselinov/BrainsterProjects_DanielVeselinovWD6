@@ -73,6 +73,20 @@
     border-top-right-radius: 10px;
 }
 
+.form-row input::placeholder {
+    font-style: italic !important;
+}
+
+.form-row .custom-select-lg {
+    height: 58px;
+    background: #fff url("../images/chevron-down-solid.svg") right 0.75rem center/26px 18px no-repeat;
+    font-size: 1rem !important;
+}
+
+.custom-b-padding {
+    padding-bottom: 25vh;
+}
+
 footer span {
     font-size: 18px;
 }
@@ -131,7 +145,7 @@ footer span {
     }
 
     .filter.border-right {
-        border: 0;
+        border: 0 !important;
     }
 }
 
@@ -142,5 +156,9 @@ footer span {
 
     #banner .display-3 {
         font-size: 3rem;
+    }
+
+    .banner .display-3 {
+        font-size: 2rem;
     }
 }

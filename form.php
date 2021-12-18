@@ -16,7 +16,7 @@
 
         <link rel="stylesheet" href="./assets/css/style.css">
     </head>
-    <body>
+    <body class="d-flex flex-column justify-content-between vh-100 bg-yellow">
         <!-- Default navbar laptop and more -->
         <nav class="d-flex justify-content-between align-items-center bg-primary">
             <a href="./home" class="nav-link ml-5">
@@ -73,19 +73,55 @@
         </div>
 
         <!-- Banner initialization -->
-        <div class="container-fluid bg-yellow">
-            <div class="d-flex justify-content-center align-items-center py-5">
+        <div class="container-fluid">
+            <div class="banner d-flex justify-content-center align-items-center py-5">
                 <p class="display-3 text-capitalize text-dark font-weight-bold mb-0 py-5">Вработи студенти</p>
             </div>
 
-            
+            <!-- Form initialization -->
+            <div class="container custom-b-padding">
+                <form action="#" method="POST" class="py-4">
+                    <div class="form-row">
+                        <div class="col-12 col-md">
+                            <label class="font-weight-bold" for="full_name">Име и Презиме</label>
+                            <input type="text" class="form-control p-4" id="full_name" name="full_name" placeholder="Вашето име и презиме">
+                        </div>
+                        <div class="col-12 col-md">
+                            <label class="font-weight-bold" for="company_name">Име на компанија</label>
+                            <input type="text" class="form-control p-4" id="company_name" name="company_name" placeholder="Име на вашата компанија">
+                        </div>
+                    </div>
+                    <div class="form-row mt-3">
+                        <div class="col-12 col-md">
+                            <label class="font-weight-bold" for="company_email">Контакт имејл</label>
+                            <input type="email" class="form-control p-4" id="company_email" name="company_email" placeholder="Контакт имејл на вашата компанија">
+                        </div>
+                        <div class="col-12 col-md">
+                            <label class="font-weight-bold" for="company_mobile">Контакт телефон</label>
+                            <input type="text" class="form-control p-4" id="company_mobile" name="company_mobile" placeholder="Контакт телефон на вашата компанија">
+                        </div>
+                    </div>
+                    <div class="form-row mt-3">
+                        <div class="col-12 col-md">
+                            <label class="font-weight-bold" for="dropdownMenuButton">Тип на студент</label>
+                            <select class="custom-select custom-select-lg font-weight-bold" id="inputGroupSelect01">
+                                <option selected>Изберете тип на студент</option>
+                                <option value="1">Студенти од маркетинг</option>
+                                <option value="2">Студенти од маркетинг</option>
+                                <option value="3">Студенти од маркетинг</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-md">
+                            <label class="invisible">испрати форма</label>
+                            <button id="btn_submit" name="btn_submit" type="submit" class="btn btn-danger font-weight-bold text-uppercase btn-block p-3">испрати</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
         
-
-        
-        
         <!-- Footer initialization -->
-        <footer class="bg-dark text-light text-center">
+        <footer class="bg-dark text-light text-center mt-5">
             <p class="font-weight-bold p-3 mb-0">Изработено со <span class="text-danger">&hearts;</span> од студентите на Brainster</p>
         </footer>
 
