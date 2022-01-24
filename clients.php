@@ -88,12 +88,9 @@
                 </thead>
                 <tbody>
                     <?php 
-                        $fetch = mysqli_query($SQL, "SELECT * FROM hiring");
+                        $fetch = mysqli_query($SQL, "SELECT hiring.id, hiring.fullname, hiring.companyname, hiring.companyemail, hiring.companymobile, courses.course FROM hiring LEFT JOIN courses ON courses.id = hiring.studentfrom");
                         if (mysqli_num_rows($fetch) > 0) {
                             while ($data = mysqli_fetch_assoc($fetch)) { 
-                                $course_id = $data["id"];
-                                $courses_fetch = mysqli_query($SQL, "SELECT course FROM courses WHERE id='$course_id'");
-                                $course_data = mysqli_fetch_assoc($courses_fetch);
                             ?>
                                 <tr>
                                     <th scope="row"><?php echo $data["id"]; ?></th>
@@ -101,7 +98,7 @@
                                     <td><?php echo $data["companyname"]; ?></td>
                                     <td><?php echo $data["companyemail"]; ?></td>
                                     <td><?php echo $data["companymobile"]; ?></td>
-                                    <td><?php echo $course_data["course"]; ?></td>
+                                    <td><?php echo $data["course"]; ?></td>
                                 </tr>
                           <?php  }
                         }
