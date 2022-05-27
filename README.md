@@ -1,6 +1,5 @@
-# BrainsterProjects_DanielVeselinovWD6
+## Brainster Library - 2nd project
 
-> All my projects will be worked on 1920x1080 resolution
+**NOTE:** _this project is using fancy url (domain/path/webpage) and etc.._
 
-
-1. Brainster Labs
+## To run this project first you need to set up a few things..
