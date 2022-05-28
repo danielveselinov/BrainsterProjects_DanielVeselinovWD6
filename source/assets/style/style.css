@@ -1,0 +1,30 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+*:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.logo {
+    display: block;
+    width: 50px;
+    margin: auto;
+}
+
+.navbar-brand p {
+    font-size: 0.8rem;
+}
+
+.nav-item .nav-link {
+    letter-spacing: 2px !important;
+}
+
+#banner {
+    background: linear-gradient(
+        90deg, #000000 0%, white 0%, rgba(0, 0, 0, 0.35) 0%), url("../images/banner-1.jpg") no-repeat center / cover;
+        height: 65vh;
+}

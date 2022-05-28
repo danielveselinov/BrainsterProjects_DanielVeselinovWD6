@@ -1,8 +1,5 @@
-# BrainsterProjects_DanielVeselinovWD6
+## Brainster Library - 2nd project
 
-> All my projects will be worked on 1920x1080 resolution
+**NOTE:** _this project is using fancy url (domain/path/webpage) and etc.._
 
-
-[1. Brainster Labs](https://gitlab.com/daniel.veselinov/brainsterprojects_danielveselinovwd6/-/tree/project01)
-
-[2. Brainster Library](https://gitlab.com/daniel.veselinov/brainsterprojects_danielveselinovwd6/-/tree/project02)
+## To run this project first you need to set up a few things..
