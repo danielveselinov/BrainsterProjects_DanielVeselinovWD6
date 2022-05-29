@@ -21,7 +21,7 @@
                     <a class="btn btn-primary" href="<?= route("login") ?>">Sign In</a>
                 </li>
                 <li class="nav-item">
-                    <a class="btn btn-outline-primary ms-lg-3 mt-3 mt-lg-0" href="#">Sign Up</a>
+                    <a class="btn btn-outline-primary ms-lg-3 mt-3 mt-lg-0" href="<?= route("register") ?>">Sign Up</a>
                 </li>
             </ul>
         </div>
