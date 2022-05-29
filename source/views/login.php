@@ -3,6 +3,9 @@
         <div class="form-floating mb-3">
             <input type="email" class="form-control is-invalid" id="email" placeholder="name@example.com">
             <label for="email">Email address</label>
+            <div id="validationServerEmailAddress" class="invalid-feedback">
+                Please provide valid email address
+            </div>
         </div>
         <div class="form-floating">
             <input type="password" class="form-control" id="password" placeholder="Password">
