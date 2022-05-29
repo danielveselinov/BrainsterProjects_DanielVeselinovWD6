@@ -6,17 +6,22 @@
 
 <!-- Filter initialization -->
 <div class="container">
-    <div class="row justify-content-start pt-5" style="user-select: none;">
-        <div class="border border-2 rounded">
-            <div class="col-12 col-md-4">
-                <div class="form-check form-check-inline fs-5">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1">
-                    <label class="form-check-label" for="inlineCheckbox1">Category Name Bla bla</label>
-                </div>
-                <div class="form-check form-check-inline fs-5">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2">
-                    <label class="form-check-label" for="inlineCheckbox2">Category</label>
-                </div>
+    <div class="row justify-content-start pt-5">
+        <p class="small text-uppercase ps-0">Filter categories</p>
+        <div class="border border-2 rounded d-flex">
+            <div class="m-2">
+                <input type="checkbox" class="btn-check" id="mgmt" autocomplete="off">
+                <label class="btn btn-danger" for="mgmt">Management</label>
+            </div>
+
+            <div class="m-2">
+                <input type="checkbox" class="btn-check" id="business" autocomplete="off">
+                <label class="btn btn-danger" for="business">Business</label>
+            </div>
+
+            <div class="m-2">
+                <input type="checkbox" class="btn-check" id="tech" autocomplete="off">
+                <label class="btn btn-danger" for="tech">Tech</label>
             </div>
         </div>
     </div>
@@ -40,7 +45,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="col-12 col-md-4 mt-3">
             <div class="book text-light card-has-bg click-col" style="background-image:url('https://source.unsplash.com/600x900/?tech,street');">
                 <img class="card-img d-none" src="https://source.unsplash.com/600x900/?tech,street" alt="Goverment Lorem Ipsum Sit Amet Consectetur dipisi?">
