@@ -13,5 +13,6 @@ $routes = [
     "dashboard" => $url . "dashboard",
     "404" => $url . "404",
     "login" => $url . "login",
-    "register" => $url . "register"
+    "register" => $url . "register",
+    "logout" => $url . "logout"
 ];

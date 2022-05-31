@@ -1,3 +1,11 @@
+<?php
+
+use BLibrary\Auth\Auth;
+
+if (Auth::isLogged()) {
+    redirect(route('home'));
+}
+?>
 <div class="d-flex justify-content-center align-items-center vh-100">
     <form class="d-flex flex-column col-10 col-md-3">
         <div id="notification"></div>

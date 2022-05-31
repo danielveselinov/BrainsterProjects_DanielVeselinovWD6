@@ -16,14 +16,35 @@
                     <a class="nav-link text-uppercase small" href="#">Link</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="btn btn-primary" href="<?= route("login") ?>">Sign In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="btn btn-outline-primary ms-lg-3 mt-3 mt-lg-0" href="<?= route("register") ?>">Sign Up</a>
-                </li>
-            </ul>
+            <?php
+                use BLibrary\Auth\Auth;
+
+                if (Auth::isLogged() && Auth::isAdmin()) {
+                    echo '<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="btn btn-primary" href="'. route("dashboard") .'">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-primary ms-lg-3 mt-3 mt-lg-0" href="'. route("logout") .'">Logout</a>
+                        </li>
+                    </ul>';     
+                } else if (Auth::isLogged()) { 
+                    echo '<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="btn btn-outline-primary" href="'. route("logout") .'">Logout</a>
+                        </li>
+                    </ul>';
+                 } else {
+                    echo '<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="btn btn-primary" href="'. route("login") .'">Sign In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary ms-lg-3 mt-3 mt-lg-0" href="'. route("register") .'">Sign Up</a>
+                    </li>
+                </ul>';
+                }
+            ?>
         </div>
     </div>
 </nav>

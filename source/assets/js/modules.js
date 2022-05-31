@@ -1,5 +1,3 @@
-// functions, alerts, and etc..
-
 export let path = 'http://localhost/brainster_projects/'
 
 export function danger(message, timer = 2000) {

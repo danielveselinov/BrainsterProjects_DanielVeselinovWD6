@@ -1,3 +1,11 @@
+<?php
+
+use BLibrary\Auth\Auth;
+
+if (Auth::isLogged()) {
+    redirect(route('home'));
+}
+?>
 <div class="d-flex justify-content-center align-items-center vh-100">
     <form class="d-flex flex-column col-10 col-md-3">
         <div id="notification"></div>
@@ -24,4 +32,5 @@
 </div>
 
 <?php require_once __DIR__ . "/../layouts/scripts.php"; ?>
-<script src="<?= PATH . "source/assets/js/register.js" ?>"></script>
+<script type="module" src="<?= PATH . "source/assets/js/modules.js" ?>"></script>
+<script type="module" src="<?= PATH . "source/assets/js/register.js" ?>"></script>
