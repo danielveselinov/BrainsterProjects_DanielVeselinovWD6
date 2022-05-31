@@ -33,7 +33,6 @@ class Auth
             }
     
         } catch (PDOException $e) {
-            // echo json_encode(['auth' => $result = false]);
             redirect(route('broken'));
         }
     }

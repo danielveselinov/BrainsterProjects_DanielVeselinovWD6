@@ -25,7 +25,6 @@ class DB
 
             return $pdo;
         } catch (PDOException $e) {
-            // Need to store the errors in LOG folder
             redirect(route("broken"));
         }
     }
