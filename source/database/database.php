@@ -24,8 +24,9 @@ class DB
             $pdo = new PDO("mysql:host=".DB_HOST.";dbname=". DB_NAME, DB_USER, DB_PASSWORD, [PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
 
             return $pdo;
-        } catch (PDOException) {
-            // Error handling needs to be done first
+        } catch (PDOException $e) {
+            // Need to store the errors in LOG folder
+            redirect(route("broken"));
         }
     }
 }

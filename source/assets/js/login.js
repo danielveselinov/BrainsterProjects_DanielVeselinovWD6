@@ -1,4 +1,4 @@
-import { path } from './modules.js'
+import { path, danger, success } from './modules.js'
 $(function() {    
     $('#signInAction').on('click', function(e) {
         e.preventDefault()
@@ -13,17 +13,14 @@ $(function() {
             let data = JSON.parse(response)
 
             if (data.auth) {
-                alert(data.auth)
+                success('You were successfully logged in')
+                setTimeout(() => { location.href = path + 'home' }, 2000)
             } else {
-                alert(data.auth)
-                // $('#email').addClass('is-invalid')
-                // $('#password').addClass('is-invalid')
-                // $('#validationServerEmailAddress').text('Wrong credentials')
-                // $('#validationServerPassword').text('Wrong credentials')
+                danger('Wrong credentials')
             }
         })
-        .catch(function(err) {
-            console.log(err)
+        .catch(() => {
+            setTimeout(() => { location.href = path + 'broken' }, 1500)
         })
     })
 })

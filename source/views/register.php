@@ -1,11 +1,9 @@
 <div class="d-flex justify-content-center align-items-center vh-100">
-    <div class="d-flex flex-column col-10 col-md-3">
+    <form class="d-flex flex-column col-10 col-md-3">
+        <div id="notification"></div>
         <div class="form-floating mb-3">
-            <input type="email" class="form-control is-invalid" id="email" placeholder="name@example.com">
+            <input type="email" class="form-control" id="email" placeholder="name@example.com">
             <label for="email">Email address</label>
-            <div id="validationServerEmailAddress" class="invalid-feedback">
-                Please provide valid email address
-            </div>
         </div>
 
         <div class="form-floating mb-3">
@@ -22,7 +20,7 @@
         <a href="<?= route("home") ?>" class="btn btn-danger mt-2">Go Back</a>
 
         <p class="lead fs-6 ps-0 mt-2">Already have an account? <a href="<?= route("login") ?>" class="text-decoration-none">Sign In</a></p>
-    </div>
+    </form>
 </div>
 
 <?php require_once __DIR__ . "/../layouts/scripts.php"; ?>
