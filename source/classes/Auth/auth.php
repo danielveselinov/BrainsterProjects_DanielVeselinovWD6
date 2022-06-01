@@ -3,6 +3,7 @@
 namespace BLibrary\Auth;
 
 use BLibrary\Database\Connection\DB;
+use BLibrary\User\User;
 use PDOException;
 
 class Auth
@@ -42,7 +43,31 @@ class Auth
      */
     public static function register($object) 
     {
-        // print_r($object);
+        try {
+            $stmt = DB::connect()->prepare("SELECT email FROM users WHERE email = ?");
+            $stmt->execute([$object['email']]);
+
+            if ($stmt->rowCount() > 0) {
+                echo json_encode(['auth' => false, 'message' => 'This email address already exists']);
+                exit;
+            }
+
+            $object['password'] = password_hash($object['password'], PASSWORD_BCRYPT);
+
+            $stmt = DB::connect()->prepare("INSERT INTO users (email, fullname, password) VALUES(?, ?, ?)");
+            $stmt->execute([$object['email'], $object['fullname'], $object['password']]);
+
+            if ($stmt->rowCount() == 0) {
+                echo json_encode(['auth' => false, 'message' => 'There was an error, please try again..']);
+                exit;
+            }
+
+            echo json_encode(['auth' => true]);
+            exit;
+
+        } catch (PDOException $e) {
+            redirect(route('broken'));
+        }
     }
 
     /**
@@ -69,5 +94,13 @@ class Auth
     public static function isAdmin()
     {
         return ($_SESSION['auth']['is_admin'] == 1) ? true : false;
+    }
+
+    /**
+     * Print logged in user data
+     */
+    public static function user()
+    {
+        return "{$_SESSION['auth']['fullname']}";
     }
 }

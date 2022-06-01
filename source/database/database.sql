@@ -6,4 +6,6 @@ create TABLE users(
     is_admin tinyint not null
 );
 
+ALTER TABLE `users` ADD `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `is_admin`;
+
 insert into users(fullname, email, password) VALUES('Daniel Veselinov', 'admin@library.com', '$2y$10$Xwjc0RhdaJ8KpFxDdYOp0.X7AjoTDonGbDkbWzEwxRAzgkwxtEJZO');

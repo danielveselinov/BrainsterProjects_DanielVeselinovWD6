@@ -15,7 +15,7 @@ $(function() {
 
             if (data.auth) {
                 success('You have successfully registered')
-                setTimeout(() => { location.href = path + 'home' }, 2000)
+                setTimeout(() => { location.href = path + 'login' }, 2000)
             } else if (!data.auth && data.message) {
                 danger(`${data.message}`)
             }

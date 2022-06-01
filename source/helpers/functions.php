@@ -12,15 +12,6 @@ function onlyPostRequestMethod(): bool
     return false;
 }
 
-
-/**
- * Checks if user is logged or not
- */
-function isLogged()
-{
-    return isset($_SESSION["auth"]) ?? null;
-}
-
 /**
  * Redirect to specfied file
  * @param string $route
@@ -42,4 +33,25 @@ function redirect(string $route): void
 {
     header("Location: {$route}");
     die();
+}
+
+/**
+ * Check if any empty fields
+ */
+function emptyFields($data)
+{
+    $flag = false;
+
+    foreach ($data as $value) {
+        if (isset($value)) {
+            if (empty($value)) {
+                $flag = true;
+            } 
+        }
+    }
+
+    if ($flag) {
+        echo json_encode(['auth' => false, 'message' => 'All fields are required']);
+        exit;
+    }
 }

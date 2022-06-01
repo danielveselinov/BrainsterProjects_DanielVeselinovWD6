@@ -10,6 +10,7 @@ if (!onlyPostRequestMethod()) {
 }
 
 if ($_POST['process'] = 'authRegister') {
+    # Validators
+    emptyFields($_POST);
     Auth::register($_POST);
-    // Auth::login($_POST); or if uspesno reg togaj u taj proces auth login
 }
