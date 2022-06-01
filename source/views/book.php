@@ -1,20 +1,34 @@
 <?php
 
 use BLibrary\Auth\Auth;
+use BLibrary\Database\Connection\DB;
+use BLibrary\Router\Router;
+
+$stmt = DB::connect()->prepare("SELECT `books`.*, `authors`.`name`, `authors`.`surname`, `authors`.`about`, `categories`.`title` as category_title 
+FROM `books`
+JOIN `authors` ON `books`.`existing_author_id` = `authors`.`id`
+JOIN `categories` ON `books`.`category` = `categories`.`id` WHERE `books`.`code` = ?");
+$stmt->execute([Router::get(3)]);
+
+if ($stmt->rowCount() == 0) {
+    redirect(route('home'));
+}
+
+$bookData = $stmt->fetch();
 
 require_once __DIR__ . "/../layouts/navbar.php"; ?>
 
 <div class="container">
     <div class="row py-5">
         <div class="col-12 col-md-4">
-            <img class="img-thumbnail w-75 d-md-block ms-md-auto" src="https://source.unsplash.com/600x900/?tech,street" alt="Goverment Lorem Ipsum Sit Amet Consectetur dipisi?">
+            <img class="img-thumbnail w-75 d-md-block ms-md-auto" src="<?= $bookData['cover_image'] ?>" />
         </div>
         <div class="col-12 col-md-6">
-            <p class="fs-2 fw-bold mb-0">Rich dad, poor dad</p>
-            <p class="fs-4 lead mb-0">Robert Kiyosaki and Sharon Lechter</p>
-            <p class="fs-6 lead mb-0">Category: <strong>Management</strong></p>
-            <p class="fs-6 lead mb-0">Originally published: <strong>1997</strong></p>
-            <p class="fs-6 lead mb-0">Pages: <strong>336</strong></p>
+            <p class="fs-2 fw-bold mb-0"><?= $bookData['title'] ?></p>
+            <p class="fs-4 lead mb-0"><?= $bookData['name'] . " " . $bookData['surname'] ?></p>
+            <p class="fs-6 lead mb-0">Category: <strong><?= ucfirst($bookData['category_title']) ?></strong></p>
+            <p class="fs-6 lead mb-0">Originally published: <strong><?= $bookData['published'] ?></strong></p>
+            <p class="fs-6 lead mb-0">Pages: <strong><?= $bookData['pages'] ?></strong></p>
 
         </div>
     </div>

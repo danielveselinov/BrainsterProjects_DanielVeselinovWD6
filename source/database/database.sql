@@ -35,6 +35,7 @@ create TABLE `books`(
     pages smallint unsigned not null,
     cover_image text not null,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    code varchat(24) not null,
     
     FOREIGN KEY(existing_author_id) REFERENCES `authors`(id),
     FOREIGN KEY(category) REFERENCES `categories`(id)
