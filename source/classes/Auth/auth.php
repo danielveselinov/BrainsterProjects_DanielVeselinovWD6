@@ -3,7 +3,6 @@
 namespace BLibrary\Auth;
 
 use BLibrary\Database\Connection\DB;
-use BLibrary\User\User;
 use PDOException;
 
 class Auth
