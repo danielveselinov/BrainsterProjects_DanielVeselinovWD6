@@ -12,5 +12,11 @@ if (!onlyPostRequestMethod()) {
 if ($_POST['process'] = 'authRegister') {
     # Validators
     emptyFields($_POST);
+
+    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+        echo json_encode(['auth' => false, 'message' => 'Please enter valid email address']);
+        exit;
+    }
+
     Auth::register($_POST);
 }
