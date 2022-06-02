@@ -39,20 +39,39 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
         <div class="col-md-10 col-xl-8">
             <p class="fw-bold small text-uppercase ps-0">comments</p>
             <div class="card">
-                <!-- ako vekje ima komentar taj korisnik ne moze nov, ako e author togaj ima delete comment kopce, ako e admin togas ima isto delete, opcii -->
-                <div class="card-body">
-                    <!-- ako e on avtor izbrisi komentar, plus administrator da go ima ovoa -->
-                    <div class="float-end">
-                        <button id="deleteCommentAction" class="btn btn-danger btn-sm">Delete comment</button>
-                    </div>
-                    <h5 class="fw-bold text-primary mb-1">Lily Coleman</h5>
-                    <p class="text-muted small mb-0">Joined - 2022.06.01</p>
-                    <p class="mt-3 pb-2">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                        quis nostrud exercitation ullamco laboris nisi ut aliquip consequat.
-                    </p>
-                </div>
+                <?php $stmt = DB::connect()->query("SELECT comments.*, users.id as user_id, users.fullname, users.is_admin FROM comments
+                JOIN `users` ON `comments`.`existing_user_id` = users.id 
+                WHERE 1");
+
+                if ($stmt->rowCount() > 0) {
+                    while ($commentsData = $stmt->fetch()) {
+                        if ($bookData['id'] == $commentsData['commented_on_book']) {
+                            if ($commentsData['is_approved']) { ?>
+                                <div class="card-body border-bottom" id="comments">
+                                    <?php if ($commentsData['user_id'] == Auth::id() || Auth::isAdmin()) {
+                                        echo "<div class='float-end'>
+                                                    <button id='deleteCommentAction' data-comment-id='{$commentsData['id']}' class='btn btn-danger btn-sm'>Delete comment</button>
+                                                </div>";
+                                    } ?>
+                                    <h5 class="fw-bold text-primary mb-1"><?= $commentsData['fullname'] ?></h5>
+                                    <p class="text-muted small mb-0"><?= $commentsData['created_at'] ?></p>
+                                    <p class="mt-3 mb-0"><?= $commentsData['comment'] ?></p>
+                                </div>
+                            <?php } else if (!$commentsData['is_approved'] && Auth::id() == $commentsData['existing_user_id']) { ?>
+                                <div class="card-body border-bottom" id="comments" style="background-color: #ffb7b7;">
+                                    <?php if ($commentsData['user_id'] == Auth::id() || Auth::isAdmin()) {
+                                        echo "<div class='float-end'>
+                                                    <button id='deleteCommentAction' data-comment-id='{$commentsData['id']}' class='btn btn-danger btn-sm'>Delete comment</button>
+                                                </div>";
+                                    } ?>
+                                    <h5 class="fw-bold text-primary mb-1"><?= $commentsData['fullname'] ?></h5>
+                                    <p class="text-muted small mb-0"><?= $commentsData['created_at'] ?></p>
+                                    <p class="mt-3 mb-0"><?= $commentsData['comment'] ?></p>
+                                </div>
+                            <?php }
+                        } 
+                    } 
+                 } else { echo "<p class='ms-3 mt-3'>There aren't any comments yet</p>"; } ?>
 
                 <?php if (Auth::isLogged()) { ?>
                     <form class="card-footer">
