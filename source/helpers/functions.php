@@ -55,3 +55,24 @@ function emptyFields($data)
         exit;
     }
 }
+
+/**
+ * Generate random code
+ *
+ * @return string
+ */
+function generateCode() : string
+{
+    $lowerCharacters = 'abcdefghijklmnopqrstuvwxyz'; 
+    $upperCharacters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $numbers = '0123456789';
+    $randomString = ''; 
+    
+    for ($i = 0; $i <2; $i++) { 
+        $index1 = rand(0, strlen($lowerCharacters) - 1);
+        $index2 = rand(0, strlen($numbers) - 1);
+        $index3 = rand(0, strlen($upperCharacters) - 1); 
+        $randomString .= $lowerCharacters[$index1] . $numbers[$index2] . $upperCharacters[$index3]; 
+    } 
+    return $randomString; 
+}
