@@ -1,4 +1,8 @@
-<?php require_once __DIR__ . "/../layouts/navbar.php"; ?>
+<?php
+
+use BLibrary\Database\Connection\DB;
+
+ require_once __DIR__ . "/../layouts/navbar.php"; ?>
 
 <div id="banner" class="d-flex justify-content-center align-items-center">
     <p class="display-3 text-capitalize text-light mb-0">feed your brain</p>
@@ -8,21 +12,16 @@
 <div class="container">
     <div class="row justify-content-start pt-5">
         <p class="small text-uppercase ps-0">Filter categories</p>
-        <div class="border border-2 rounded d-flex">
-            <div class="m-2">
-                <input type="checkbox" class="btn-check" id="mgmt" autocomplete="off">
-                <label class="btn btn-danger" for="mgmt">Management</label>
-            </div>
-
-            <div class="m-2">
-                <input type="checkbox" class="btn-check" id="business" autocomplete="off">
-                <label class="btn btn-danger" for="business">Business</label>
-            </div>
-
-            <div class="m-2">
-                <input type="checkbox" class="btn-check" id="tech" autocomplete="off">
-                <label class="btn btn-danger" for="tech">Tech</label>
-            </div>
+        <div class="border border-2 rounded row">
+            <?php $stmt = DB::connect()->query("SELECT * FROM categories WHERE 1");
+            if ($stmt->rowCount() == 0) {
+                echo "<p class='small text-uppercase mt-3 text-danger'>nothing found</p>";
+            } else { while($filterData = $stmt->fetch()) { ?>
+                <div class="col m-2">
+                    <input type="checkbox" class="btn-check" id="<?= $filterData['id'] ?>" data-category="<?= $filterData['title'] ?>" autocomplete="off">
+                    <label class="btn btn-danger" for="<?= $filterData['id'] ?>"><?= ucfirst($filterData['title']) ?></label>
+                </div>
+            <?php } } ?>
         </div>
     </div>
 </div>
@@ -30,53 +29,31 @@
 <!-- Cards initialization -->
 <div class="container">
     <div class="row py-5">
-        <div class="col-12 col-md-4 mt-3">
-            <div class="book text-light card-has-bg click-col" style="background-image:url('https://source.unsplash.com/600x900/?tech,street');">
-                <img class="card-img d-none" src="https://source.unsplash.com/600x900/?tech,street" alt="Goverment Lorem Ipsum Sit Amet Consectetur dipisi?">
-                <div class="card-img-overlay d-flex flex-column">
-                    <div class="card-body">
-                        <small class="text-warning mb-2">Thought Leadership</small>
-                        <a href="#" class="h4 d-block mt-0 text-light ">Goverment Lorem Ipsum Sit Amet Consectetur dipisi?</a>
-                        <small><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
-                                <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" />
-                                <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" />
-                            </svg> Tech</small>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php 
+        $stmt = DB::connect()->query("SELECT `books`.*, `authors`.`name`, `authors`.`surname`, `categories`.`title` as category_title 
+        FROM `books`
+        JOIN `authors` ON `books`.`existing_author_id` = `authors`.`id`
+        JOIN `categories` ON `books`.`category` = `categories`.`id` WHERE 1");
 
-        <div class="col-12 col-md-4 mt-3">
-            <div class="book text-light card-has-bg click-col" style="background-image:url('https://source.unsplash.com/600x900/?tech,street');">
-                <img class="card-img d-none" src="https://source.unsplash.com/600x900/?tech,street" alt="Goverment Lorem Ipsum Sit Amet Consectetur dipisi?">
-                <div class="card-img-overlay d-flex flex-column">
-                    <div class="card-body">
-                        <small class="text-warning mb-2">Thought Leadership</small>
-                        <a href="#" class="h4 d-block mt-0 text-light ">Goverment Lorem Ipsum Sit Amet Consectetur dipisi?</a>
-                        <small><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
-                                <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" />
-                                <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" />
-                            </svg> Tech</small>
+        if ($stmt->rowCount() == 0) {
+            echo "<div class='alert alert-warning' role='alert'>There aren't any book yet in our database, please change filter or try again later..</div>";
+        } else { while($bookData = $stmt->fetch()) { ?>
+            <div class="col-12 col-md-4 mt-3">
+                <div class="book text-light card-has-bg click-col" style="background-image:url('<?= $bookData['cover_image'] ?>');">
+                    <img class="card-img d-none" src="<?= $bookData['cover_image'] ?>" />
+                    <div class="card-img-overlay d-flex flex-column">
+                        <div class="card-body">
+                            <small class="text-warning mb-2"><?= $bookData['name'] . " " . $bookData['surname'] ?></small>
+                            <a href="<?= PATH . "book/" . $bookData['code'] ?>" class="h4 d-block mt-0 text-light "><?= $bookData['title'] ?></a>
+                            <small><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
+                                    <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" />
+                                    <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" />
+                                </svg> <?= ucfirst($bookData['category_title']) ?></small>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="col-12 col-md-4 mt-3">
-            <div class="book text-light card-has-bg click-col" style="background-image:url('https://source.unsplash.com/600x900/?tech,street');">
-                <img class="card-img d-none" src="https://source.unsplash.com/600x900/?tech,street" alt="Goverment Lorem Ipsum Sit Amet Consectetur dipisi?">
-                <div class="card-img-overlay d-flex flex-column">
-                    <div class="card-body">
-                        <small class="text-warning mb-2">Thought Leadership</small>
-                        <a href="#" class="h4 d-block mt-0 text-light ">Goverment Lorem Ipsum Sit Amet Consectetur dipisi?</a>
-                        <small><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
-                                <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" />
-                                <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" />
-                            </svg> Tech</small>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <?php } } ?>
     </div>
 </div>
 
