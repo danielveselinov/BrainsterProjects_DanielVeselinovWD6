@@ -97,12 +97,22 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
 
 <div class="container">
     <div class="row pb-5 justify-content-center">
-        <div class="col-md-10 col-xl-8">
+        <div class="col-md-10 col-xl-8" id="ajax">
             <?php
             if (Auth::isLogged()) { ?>
+                <div id="notification"></div>
                 <div class="d-flex align-items-center mb-2">
                     <p class="fw-bold small text-uppercase my-auto me-2">private notes</p>
-                    <button id='createMyNoteAction' class='btn btn-outline-dark btn-sm text-uppercase'>Create note</button>       
+                    <button id='addMyNoteAction' class='btn btn-outline-dark btn-sm text-uppercase'>Create note</button>       
+                </div>
+                <div class="card" id="new_note" style="display: none;">
+                    <div class="form-floating">
+                        <textarea class="form-control border-0" placeholder="Leave a note here" id="newNote" style="height: 100px; resize: none;"></textarea>
+                        <label for="newNote">Leave a note here</label>
+                    </div>
+                    <div class="card-footer">
+                        <button id='createMyNoteAction' data-user-id='<?= Auth::id() ?>' data-book-code='<?= $bookData['id'] ?>' class='btn btn-outline-dark btn-sm'>Submit</button>
+                    </div>
                 </div>
            <?php } 
             $stmt = DB::connect()->query("SELECT `notes`.*, `users`.`id` as user_id, `books`.`id` as book_id FROM notes
@@ -113,20 +123,18 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
             if ($stmt->rowCount() > 0) {
                 while ($notesData = $stmt->fetch()) { 
                     if (Auth::isLogged() && $notesData['user_id'] == Auth::id()) { ?>
-                    <div class="accordion mt-2" id="accordion<?= $notesData['id'] ?>">
+                    <div class="accordion mt-2" id="accordion">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="heading<?= $notesData['id'] ?>">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $notesData['id'] ?>">
-                                    Note #{<?= $notesData['id'] ?>} - <?= $notesData['created_at'] ?>
+                                    Note # - <?= $notesData['created_at'] ?>
                                 </button>
                             </h2>
                             <div id="collapse<?= $notesData['id'] ?>" class="accordion-collapse collapse" data-bs-parent="#accordion<?= $notesData['id'] ?>">
                                 <div class="accordion-body">
                                     <div class="form-floating">
-                                        <div class="form-floating">
-                                            <textarea class="form-control" placeholder="Leave a note here" id="noteContent" style="height: 100px; resize: none;"><?= $notesData['note_text'] ?></textarea>
-                                            <label for="noteContent">Leave a note here</label>
-                                        </div>
+                                        <textarea class="form-control" placeholder="Leave a note here" id="noteContent" style="height: 100px; resize: none;"><?= $notesData['note_text'] ?></textarea>
+                                        <label for="noteContent">Leave a note here</label>
                                     </div>
                                 </div>
                                 <div class="card-footer">
@@ -142,3 +150,5 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
 </div>
 
 <?php require_once __DIR__ . "/../layouts/scripts.php"; ?>
+<script type="module" src="<?= PATH . "source/assets/js/modules.js" ?>"></script>
+<script type="module" src="<?= PATH . "source/assets/js/book_notes.js" ?>"></script>
