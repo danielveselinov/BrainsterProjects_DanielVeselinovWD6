@@ -92,7 +92,7 @@ class Auth
      */
     public static function isAdmin()
     {
-        return ($_SESSION['auth']['is_admin'] == 1) ? true : false;
+        return isset($_SESSION['auth']['is_admin']) ? ($_SESSION['auth']['is_admin'] == 1 ? true : false) : false;
     }
 
     /**
@@ -101,5 +101,15 @@ class Auth
     public static function user()
     {
         return "{$_SESSION['auth']['fullname']}";
+    }
+
+    /**
+     * Returns current user id
+     *
+     * @return string
+     */
+    public static function id() : string
+    {
+        return isset($_SESSION['auth']) ? $_SESSION['auth']['id'] : '';
     }
 }
