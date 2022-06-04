@@ -9,7 +9,7 @@ if (!onlyPostRequestMethod()) {
     redirect(route('home'));
 }
 
-if ($_POST['process'] = 'noteCreate') {
+if ($_POST['process'] = 'noteDelete') {
 
     emptyFields($_POST);
 
@@ -19,11 +19,12 @@ if ($_POST['process'] = 'noteCreate') {
             exit;
         }
 
-        $stmt = DB::connect()->prepare("INSERT INTO notes (existing_user_id, note_on_book, note_text) VALUES(?, ?, ?)");
-        $stmt->execute([$_POST['user'], $_POST['book_code'], $_POST['note']]);
+        $stmt = DB::connect()->prepare("DELETE FROM notes WHERE id = ?");
+        $stmt->execute([$_POST['note_id']]);
 
-        echo json_encode(['auth' => true, 'id' => DB::connect()->lastInsertId()]);
+        echo json_encode(['auth' => true]);
         exit;
+        
     } catch (PDOException $e) {
         echo json_encode(['auth' => false, 'message' => $e]);
         exit;
