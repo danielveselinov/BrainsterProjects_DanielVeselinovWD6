@@ -7,7 +7,7 @@ $(function() {
         let comment = $('#comment').val()
         let comment_on_book = $(this).attr('data-book-id')
 
-        $.post(path + "source/actions/Book/create.php", {
+        $.post(path + "source/actions/Comment/create.php", {
             process: 'commentCreate', user, comment, comment_on_book
         })
         .then((response) => {
@@ -38,7 +38,7 @@ $(function() {
         let user = $(this).attr('data-user-id') 
         let comment_id = $(this).attr('data-comment-id')
 
-        $.post(path + "/source/actions/Book/delete.php", {
+        $.post(path + "/source/actions/Comment/delete.php", {
             process: 'commentDelete', user, comment_id
         })
         .then((response) => {
