@@ -9,6 +9,8 @@ if (!Auth::isAdmin() || !Auth::isLogged()) {
 
 require_once __DIR__ . "/../layouts/navbar.php"; ?>
 
+<div id="modal-load"></div>
+
 <div class="container py-3">
     <ul class="nav nav-tabs" id="myTab">
         <li class="nav-item">
@@ -44,7 +46,7 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <?php 
+                                        <?php
                                         if ($categoryData['is_deleted']) { ?>
                                             <span class="xs-small text-uppercase text-danger mb-0">deleted</span>
                                             <button id="restoreCategoryAction" data-category-id="<?= $categoryData['id'] ?>" class="btn btn-warning btn-sm mt-1">Restore</button>
@@ -60,7 +62,7 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
                         <div class="col-12">
                             <div class="card border-0">
                                 <div class="card-footer">
-                                <p class="lead mb-0">No categories were found yet</p>
+                                    <p class="lead mb-0">No categories were found yet</p>
                                 </div>
                             </div>
                         </div>
