@@ -30,6 +30,9 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
             <p class="fs-6 lead mb-0">Originally published: <strong><?= $bookData['published'] ?></strong></p>
             <p class="fs-6 lead mb-0">Pages: <strong><?= $bookData['pages'] ?></strong></p>
 
+            <hr>
+            <p class="h3 fw-bold">About author</p>
+            <p class="fs-6 lead mb-0"><?= $bookData['about'] ?></p>
         </div>
     </div>
 </div>
