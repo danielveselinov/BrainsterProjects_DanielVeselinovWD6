@@ -69,7 +69,7 @@ $(function() {
         let category_id = $(this).attr('data-category-id')
         let title = $(`#category_title_${category_id}`).val()
 
-		$('#modal-load').load(path + 'source/layouts/modal.php', { modal: "confirmDeleteCategory", category_id, title }, function() {
+		$('#modal-load').load(path + 'source/layouts/categories.modal.php', { modal: "confirmDeleteCategory", category_id, title }, function() {
             $('#confirmModalDelete').modal('show')
         })
 	})

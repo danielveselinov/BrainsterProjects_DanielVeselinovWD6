@@ -123,3 +123,7 @@
 .xs-small {
     font-size: 12px !important;
 }
+
+.pointer {
+    cursor: pointer !important;
+}
