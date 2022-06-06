@@ -13,7 +13,7 @@ use BLibrary\Database\Connection\DB;
     <div class="row justify-content-start pt-5">
         <p class="small text-uppercase ps-0">Filter categories</p>
         <div class="border border-2 rounded row">
-            <?php $stmt = DB::connect()->query("SELECT * FROM categories WHERE 1");
+            <?php $stmt = DB::connect()->query("SELECT * FROM categories WHERE is_deleted = 0 ORDER BY title ASC");
             if ($stmt->rowCount() == 0) {
                 echo "<p class='small text-uppercase mt-3 text-danger'>nothing found</p>";
             } else { while($filterData = $stmt->fetch()) { ?>
