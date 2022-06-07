@@ -30,7 +30,7 @@ $(function() {
                         <div id="collapse${data.id}" class="accordion-collapse collapse" data-bs-parent="#accordion${data.id}">
                             <div class="accordion-body">
                                 <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Leave a note here" id="noteContent" style="height: 100px; resize: none;">${note}</textarea>
+                                    <textarea class="form-control" placeholder="Leave a note here" id="noteContent${data.id}" style="height: 100px; resize: none;">${note}</textarea>
                                     <label for="noteContent">Leave a note here</label>
                                 </div>
                             </div>
