@@ -22,11 +22,17 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
         <li class="nav-item">
             <button class="nav-link" id="authors-tab" data-bs-target="#authors" data-bs-toggle="tab">Authors</button>
         </li>
+        <li class="nav-item">
+            <button class="nav-link" id="comments-tab" data-bs-target="#comments" data-bs-toggle="tab">Comments</button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" id="books-tab" data-bs-target="#books" data-bs-toggle="tab">Books</button>
+        </li>
     </ul>
     <div class="tab-content" id="myTabContent">
         <div id="notification" class="mt-4"></div>
         <div class="tab-pane fade show active" id="dashboard">
-            This section is still in progress..
+            <strong>Stats:</strong> categoris(a, in_a), authors, comments, books -> same(boxes)
         </div>
         <div class="tab-pane fade" id="categories">
             <small class="small text-uppercase fw-bold mt-2 mb-0">insert new categry</small>
@@ -90,11 +96,17 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
                         <label for="author_surname">Last Name</label>
                     </div>
                 </div>
+                <div class="col col-md col-xl-6">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="author_about" placeholder="Author short bio. (min. 20 chars)..">
+                        <label for="author_about">Author short bio. (min. 20 chars)..</label>
+                    </div>
+                </div>
                 <div class="d-block mt-0">
                     <button id="createAuthorAction" class="btn btn-outline-dark btn-sm mt-1">Insert author</button>
                 </div>
             </form>
-            <!-- select name and surname , ako dvete postoat znaci error -->
+            
             <div class="container">
                 <ul class="list-group my-4" id="authors_list">
                     <?php $stmt = DB::connect()->query("SELECT * FROM authors WHERE 1");
@@ -107,7 +119,7 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
                                 <div class="d-flex">
                                     <?php
                                     if (!$authorData['is_deleted']) { ?>
-                                        <span id="updateAuthorModal" data-author-id="<?= $authorData['id'] ?>" class="badge bg-warning rounded-pill mx-2 pointer">
+                                        <span id="updateAuthorModalA" data-author-id="<?= $authorData['id'] ?>" data-name="<?= $authorData['name'] ?>" data-surname="<?= $authorData['surname'] ?>" data-about="<?= $authorData['about'] ?>" data-created="<?= $authorData['created_at'] ?>" class="badge bg-warning rounded-pill mx-2 pointer">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                                 <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                                 <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
@@ -131,10 +143,18 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
                 </ul>
             </div>
         </div>
+        
+        <div class="tab-pane fade" id="comments">
+            comments read, restore, delete
+        </div>
 
+        <div class="tab-pane fade" id="books">
+            books crud
+        </div>
     </div>
 </div>
 
 <?php require_once __DIR__ . "/../layouts/scripts.php"; ?>
 <script type="module" src="<?= PATH . "source/assets/js/modules.js" ?>"></script>
 <script type="module" src="<?= PATH . "source/assets/js/categories.js" ?>"></script>
+<script type="module" src="<?= PATH . "source/assets/js/authors.js" ?>"></script>
