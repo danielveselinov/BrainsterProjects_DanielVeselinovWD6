@@ -59,7 +59,7 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
                                         <?php
                                         if ($categoryData['is_deleted']) { ?>
                                             <span class="xs-small text-uppercase text-danger mb-0">deleted</span>
-                                            <button id="restoreCategoryAction" data-category-id="<?= $categoryData['id'] ?>" class="btn btn-warning btn-sm mt-1">Restore</button>
+                                            <button id="restoreCategoryAction" data-category-id="<?= $categoryData['id'] ?>" class="btn btn-warning btn-sm">Restore</button>
                                         <?php } else if (!$categoryData['is_deleted']) { ?>
                                             <button id="updateCategoryAction" data-category-id="<?= $categoryData['id'] ?>" class="btn btn-outline-primary btn-sm mt-1">Update</button>
                                             <button id="deleteCategory" data-category-id="<?= $categoryData['id'] ?>" class="btn btn-danger btn-sm mt-1">Delete</button>
@@ -112,7 +112,7 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
                     <?php $stmt = DB::connect()->query("SELECT * FROM authors WHERE 1");
                     if ($stmt->rowCount() > 0) {
                         while ($authorData = $stmt->fetch()) { ?>
-                            <li class="list-group-item d-flex justify-content-between align-items-center <?= ($authorData['is_deleted'] ? 'bg-secondary' : '') ?>">
+                            <li class="list-group-item d-flex justify-content-between align-items-center <?= ($authorData['is_deleted'] ? 'bg-gray' : '') ?>">
                                 <div class="d-flex">
                                     <p class="fw-bold mb-0 me-4">Author: </p><?= $authorData['name'] . " " . $authorData['surname'] ?>
                                 </div>
@@ -145,7 +145,50 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
         </div>
         
         <div class="tab-pane fade" id="comments">
-            comments read, restore, delete
+            <div class="container">
+                <div class="row justify-content-center my-5" id="comments_list">
+                    <?php $stmt = DB::connect()->query("SELECT `comments`.*, `users`.`fullname`, `books`.`title`, `books`.`code` 
+                    FROM `comments`
+                    JOIN `users` ON comments.existing_user_id = users.id
+                    JOIN `books` ON comments.commented_on_book = books.id
+                    WHERE 1 ORDER BY id ASC");
+
+                    if ($stmt->rowCount() > 0) {
+                        while ($commentData = $stmt->fetch()) { ?>
+                            <div class="col-12 col-md-4 col-xl-3 mt-2">
+                                <div class="card <?= (!$commentData['is_approved'] ? 'bg-gray' : '') ?>">
+                                    <div class="card-header">
+                                        <div class="d-flex justify-content-between">
+                                            <p class="mb-0 fw-bold">From: <span class="fw-normal"><?= $commentData['fullname'] ?></span></p>
+                                            <?php if ($commentData['is_approved']) { ?>
+                                                <span id="deleteCommentAction" data-comment-id="<?= $commentData['id'] ?>" class="badge bg-danger rounded-pill pointer fload-end">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
+                                                        <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
+                                                    </svg>
+                                                </span>            
+                                            <?php } else { ?>
+                                                <span id="appoveCommentAction" data-comment-id="<?= $commentData['id'] ?>" class="badge bg-danger rounded-pill pointer fload-end">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                                                        <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                                                    </svg>
+                                                </span>    
+                                            <?php } ?>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <strong>Comment:</strong> <?= $commentData['comment'] ?>
+                                    </div>
+                                    <div class="card-footer">
+                                        <strong>Comment on Book:</strong><a href="<?= PATH . "book/" . $commentData['code'] ?>" class="text-decoration-none"> <?= $commentData['title'] ?></a>       
+                                    </div>
+                                </div>
+                            </div>
+                        <?php }
+                    } else {
+                        echo "<ul class='list-group my-4'><li class='list-group-item fw-bold'>No comments found yet</li></ul>";
+                    } ?>
+                </div>                       
+            </div>
         </div>
 
         <div class="tab-pane fade" id="books">

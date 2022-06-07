@@ -127,3 +127,7 @@
 .pointer {
     cursor: pointer !important;
 }
+
+.bg-gray {
+    background-color: #ced4da !important;
+}
