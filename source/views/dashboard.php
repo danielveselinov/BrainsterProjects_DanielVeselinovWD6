@@ -58,7 +58,7 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
                                     <div class="card-footer">
                                         <?php
                                         if ($categoryData['is_deleted']) { ?>
-                                            <span class="xs-small text-uppercase text-danger mb-0">deleted</span>
+                                            <span class="xs-small text-uppercase text-danger m-0">deleted</span>
                                             <button id="restoreCategoryAction" data-category-id="<?= $categoryData['id'] ?>" class="btn btn-warning btn-sm">Restore</button>
                                         <?php } else if (!$categoryData['is_deleted']) { ?>
                                             <button id="updateCategoryAction" data-category-id="<?= $categoryData['id'] ?>" class="btn btn-outline-primary btn-sm mt-1">Update</button>
@@ -146,7 +146,7 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
         
         <div class="tab-pane fade" id="comments">
             <div class="container">
-                <div class="row justify-content-center my-5" id="comments_list">
+                <div class="row justify-content-center mb-4" id="comments_list">
                     <?php $stmt = DB::connect()->query("SELECT `comments`.*, `users`.`fullname`, `books`.`title`, `books`.`code` 
                     FROM `comments`
                     JOIN `users` ON comments.existing_user_id = users.id
@@ -179,7 +179,7 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
                                         <strong>Comment:</strong> <?= $commentData['comment'] ?>
                                     </div>
                                     <div class="card-footer">
-                                        <strong>Comment on Book:</strong><a href="<?= PATH . "book/" . $commentData['code'] ?>" class="text-decoration-none"> <?= $commentData['title'] ?></a>       
+                                        <strong>Comment on Book:</strong><a href="<?= PATH . "book/" . $commentData['code'] ?>" class="text-decoration-none" target="_blank"> <?= $commentData['title'] ?></a>       
                                     </div>
                                 </div>
                             </div>
@@ -201,3 +201,4 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
 <script type="module" src="<?= PATH . "source/assets/js/modules.js" ?>"></script>
 <script type="module" src="<?= PATH . "source/assets/js/categories.js" ?>"></script>
 <script type="module" src="<?= PATH . "source/assets/js/authors.js" ?>"></script>
+<script type="module" src="<?= PATH . "source/assets/js/comments_dash.js" ?>"></script>
