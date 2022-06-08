@@ -2,6 +2,7 @@
 
 use BLibrary\Auth\Auth;
 use BLibrary\Database\Connection\DB;
+use BLibrary\Router\Router;
 
 if (!Auth::isAdmin() || !Auth::isLogged()) {
     redirect(route('home'));
@@ -191,8 +192,53 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
             </div>
         </div>
 
-        <div class="tab-pane fade" id="books">
-            books crud
+        <div class="tab-pane fade" id="books">                    
+            <!-- koga se brise kniga se proveruva ako id == code, isto taka, selktiar prvo ID na avtor kategorija pa brise kako i da bese toa  -->
+            <div class="d-flex justify-content-between align-items-center border-bottom py-2">
+                <small class="small text-uppercase fw-bold mx-1">insert new book</small>
+                <button id="createBookModalBtn" class="btn btn-outline-dark btn-sm mx-1">Insert book</button>
+            </div>
+            <div class="container">
+                <ul class="list-group my-4" id="books_list">
+                    <?php 
+                    $stmt = DB::connect()->query("SELECT `books`.*, `authors`.`name`, `authors`.`surname`, `categories`.`title` as category_title FROM `books`
+                    JOIN `authors` ON `books`.`existing_author_id` = `authors`.`id`
+                    JOIN `categories` ON `books`.`category` = `categories`.`id`
+                    WHERE 1");
+
+                    if ($stmt->rowCount() > 0) {
+                        while ($bookData = $stmt->fetch()) { ?>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div class="d-flex flex-column">
+                                        <p class="fw-normal fs-5 mb-1">Book: <span class="fw-bold"><?= $bookData['title'] ?></span></p>
+                                        <small>Author: <span class="fw-bold"><?= $bookData['name'] . " " . $bookData['surname'] ?></span></small>
+                                    </div>
+                                    <div class="d-flex">
+                                        <a href="<?= PATH . "book/{$bookData['code']}" ?>" target="_blank" class="badge bg-info rounded-pill mx-2 pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                                                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                                                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                                            </svg>  
+                                        </a>
+                                        <a href="<?= PATH . "book/{$bookData['code']}/edit" ?>" target="_blank" class="badge bg-warning rounded-pill mx-2 pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                            </svg>  
+                                        </a>
+                                        <span id="deleteBookAction" data-book-id="<?= $bookData['id'] ?>" data-book-code="<?= $bookData['code'] ?>" class="badge bg-danger rounded-pill mx-2 pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-archive-fill" viewBox="0 0 16 16">
+                                                <path d="M12.643 15C13.979 15 15 13.845 15 12.5V5H1v7.5C1 13.845 2.021 15 3.357 15h9.286zM5.5 7h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zM.8 1a.8.8 0 0 0-.8.8V3a.8.8 0 0 0 .8.8h14.4A.8.8 0 0 0 16 3V1.8a.8.8 0 0 0-.8-.8H.8z" />
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </li>
+                        <?php }
+                    } else {
+                        echo "<ul class='list-group my-4'><li class='list-group-item fw-bold'>No books found yet</li></ul>";
+                    } ?>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
@@ -202,3 +248,4 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
 <script type="module" src="<?= PATH . "source/assets/js/categories.js" ?>"></script>
 <script type="module" src="<?= PATH . "source/assets/js/authors.js" ?>"></script>
 <script type="module" src="<?= PATH . "source/assets/js/comments_dash.js" ?>"></script>
+<script type="module" src="<?= PATH . "source/assets/js/books.js" ?>"></script>

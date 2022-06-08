@@ -16,6 +16,17 @@ if ($stmt->rowCount() == 0) {
 
 $bookData = $stmt->fetch();
 
+if (Router::get(3) == $bookData['code'] && Router::get(4) == 'edit') {
+    if (!Auth::isAdmin()) {
+        redirect(PATH . 'book/'. Router::get(3).'');
+    }
+    
+    
+    echo "edit mode";
+
+
+} else if (Router::get(3) == $bookData['code']) { 
+
 require_once __DIR__ . "/../layouts/navbar.php"; ?>
 
 <div class="container">
@@ -156,3 +167,4 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
 <script type="module" src="<?= PATH . "source/assets/js/modules.js" ?>"></script>
 <script type="module" src="<?= PATH . "source/assets/js/book_comments.js" ?>"></script>
 <script type="module" src="<?= PATH . "source/assets/js/book_notes.js" ?>"></script>
+<?php } ?>

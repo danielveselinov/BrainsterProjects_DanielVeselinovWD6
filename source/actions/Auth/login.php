@@ -9,5 +9,5 @@ if (!onlyPostRequestMethod()) {
 }
 
 if ($_POST['process'] = 'authLogin') {
-    Auth::Login($_POST);
+    Auth::login($_POST);
 }
