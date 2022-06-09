@@ -68,5 +68,34 @@ $(function () {
         })
     })
 
+    $('body').on('click', '#deleteBookModal', function() {
+        let book_id = $(this).attr('data-book-id')
+        let book_code = $(this).attr('data-book-code')
 
+		$('#modal-load').load(path + 'source/layouts/books.modal.php', { modal: "deleteBookModal", book_id, book_code }, function() {
+            $('#bookModalDelete').modal('show')
+        })
+    })
+
+    $('#modal-load').on('click', '#deleteGivenBook', function() {
+        let book_id = $(this).attr('data-book-id')
+        let book_code = $(this).attr('data-book-code')
+
+        $.post(path + 'source/actions/Book/delete.php', {
+            process: 'bookDelete', book_id, book_code
+        }).then((response) => {
+            let data = JSON.parse(response)
+
+            if (data.auth) {
+                $('#bookModalDelete').modal('hide')
+                success('You have successfully deleted selected book and it\'s data')
+                $('#books_list').load(location.href + ' #books_list');
+            } else if (!data.auth && data.message) {
+                danger(`${data.message}`)
+            }
+        }).catch((err) => {
+            let data = JSON.parse(err.responseText)
+            danger(`${data.message}`)
+        })
+    })
 })

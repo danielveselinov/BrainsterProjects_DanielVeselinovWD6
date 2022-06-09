@@ -94,4 +94,22 @@
             </div>
         </div>
     </div>
+<?php } else if ($_POST['modal'] == 'deleteBookModal') { ?>
+    <div class="modal fade" id="bookModalDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Confirm delete book</span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    You're about to delete selected book and it's data (comments & notes)</strong>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="deleteGivenBook" data-book-id="<?= $_POST['book_id'] ?>" data-book-code="<?= $_POST['book_code'] ?>" class="btn btn-primary">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
 <?php }

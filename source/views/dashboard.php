@@ -2,7 +2,6 @@
 
 use BLibrary\Auth\Auth;
 use BLibrary\Database\Connection\DB;
-use BLibrary\Router\Router;
 
 if (!Auth::isAdmin() || !Auth::isLogged()) {
     redirect(route('home'));
@@ -33,7 +32,97 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
     <div class="tab-content" id="myTabContent">
         <div id="notification" class="mt-4"></div>
         <div class="tab-pane fade show active" id="dashboard">
-            <strong>Stats:</strong> categoris(a, in_a), authors, comments, books -> same(boxes)
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <div class="card text-light bg-danger mt-2 pb-3">
+                            <div class="card-body">
+                                <p class="fs-3 fw-bold mb-0">
+                                <?php $stmt = DB::connect()->query("SELECT id FROM `users` WHERE 1"); ?>
+                                <?= $stmt->rowCount() ?></p>
+                                <p class="fs-6 fw-light text-uppercase mb-0">users</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <div class="card text-light bg-danger mt-2">
+                            <div class="card-body">
+                                <p class="fs-3 fw-bold mb-0"><p class="fs-3 fw-bold mb-0">
+                                <?php $stmt = DB::connect()->query("SELECT id FROM `books` WHERE 1"); ?>
+                                <?= $stmt->rowCount() ?></p></p>
+                                <p class="fs-6 fw-light text-uppercase mb-0">books</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <div class="card text-light bg-danger mt-2">
+                            <div class="card-body">
+                                <p class="fs-3 fw-bold mb-0"><p class="fs-3 fw-bold mb-0">
+                                <?php $stmt = DB::connect()->query("SELECT id FROM `categories` WHERE is_deleted = '0'"); ?>
+                                <?= $stmt->rowCount() ?></p></p>
+                                <p class="fs-6 fw-light text-uppercase mb-0">active categories</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <div class="card text-light bg-danger mt-2">
+                            <div class="card-body">
+                                <p class="fs-3 fw-bold mb-0"><p class="fs-3 fw-bold mb-0">
+                                <?php $stmt = DB::connect()->query("SELECT id FROM `categories` WHERE is_deleted = '1'"); ?>
+                                <?= $stmt->rowCount() ?></p></p>
+                                <p class="fs-6 fw-light text-uppercase mb-0">inactive categories</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <div class="card text-light bg-primary mt-2">
+                            <div class="card-body">
+                                <p class="fs-3 fw-bold mb-0"><p class="fs-3 fw-bold mb-0">
+                                <?php $stmt = DB::connect()->query("SELECT id FROM `authors` WHERE is_deleted = '0'"); ?>
+                                <?= $stmt->rowCount() ?></p></p>
+                                <p class="fs-6 fw-light text-uppercase mb-0">active authors</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <div class="card text-light bg-primary mt-2">
+                            <div class="card-body">
+                                <p class="fs-3 fw-bold mb-0"><p class="fs-3 fw-bold mb-0">
+                                <?php $stmt = DB::connect()->query("SELECT id FROM `authors` WHERE is_deleted = '1'"); ?>
+                                <?= $stmt->rowCount() ?></p></p>
+                                <p class="fs-6 fw-light text-uppercase mb-0">inactive authors</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <div class="card text-light bg-primary mt-2">
+                            <div class="card-body">
+                                <p class="fs-3 fw-bold mb-0"><p class="fs-3 fw-bold mb-0">
+                                <?php $stmt = DB::connect()->query("SELECT id FROM `comments` WHERE 1"); ?>
+                                <?= $stmt->rowCount() ?></p></p>
+                                <p class="fs-6 fw-light text-uppercase mb-0">comments</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-3">
+                        <div class="card text-light bg-primary mt-2">
+                            <div class="card-body">
+                                <p class="fs-3 fw-bold mb-0"><p class="fs-3 fw-bold mb-0">
+                                <?php $stmt = DB::connect()->query("SELECT id FROM `notes` WHERE 1"); ?>
+                                <?= $stmt->rowCount() ?></p></p>
+                                <p class="fs-6 fw-light text-uppercase mb-0">notes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="tab-pane fade" id="categories">
             <small class="small text-uppercase fw-bold mt-2 mb-0">insert new categry</small>
@@ -193,7 +282,6 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
         </div>
 
         <div class="tab-pane fade" id="books">                    
-            <!-- koga se brise kniga se proveruva ako id == code, isto taka, selktiar prvo ID na avtor kategorija pa brise kako i da bese toa  -->
             <div class="d-flex justify-content-between align-items-center border-bottom py-2">
                 <small class="small text-uppercase fw-bold mx-1">insert new book</small>
                 <button id="createBookModalBtn" class="btn btn-outline-dark btn-sm mx-1">Insert book</button>
