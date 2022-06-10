@@ -9,54 +9,29 @@ use BLibrary\Database\Connection\DB;
 </div>
 
 <!-- Filter initialization -->
+<div class="container my-2" id="notification"></div>
 <div class="container">
-    <div class="row justify-content-start pt-5">
-        <p class="small text-uppercase ps-0">Filter categories</p>
-        <div class="border border-2 rounded row">
-            <?php $stmt = DB::connect()->query("SELECT * FROM categories WHERE is_deleted = 0 ORDER BY title ASC");
+    <p class="small text-uppercase p-0 mt-5">Filter categories</p>
+    <div class="row border border-2 rounded g-0">
+        <form class="d-flex flex-wrap m-2" id="submit">
+        <?php $stmt = DB::connect()->query("SELECT * FROM categories WHERE is_deleted = 0 ORDER BY title ASC");
             if ($stmt->rowCount() == 0) {
-                echo "<p class='small text-uppercase mt-3 text-danger'>nothing found</p>";
+                echo "<p class='small text-uppercase mt-3 bg-danger text-light p-1 rounded'>nothing found</p>";
             } else { while($filterData = $stmt->fetch()) { ?>
-                <div class="col m-2">
-                    <input type="checkbox" class="btn-check" id="<?= $filterData['id'] ?>" data-category="<?= $filterData['title'] ?>" autocomplete="off">
-                    <label class="btn btn-danger" for="<?= $filterData['id'] ?>"><?= ucfirst($filterData['title']) ?></label>
-                </div>
+                <input type="checkbox" class="btn-check m-2 filter-checkbox" id="categoryFilter<?= $filterData['id'] ?>" name="categoryFilter" data-category="<?= $filterData['id'] ?>" autocomplete="off">
+                <label class="btn btn-danger m-2" for="categoryFilter<?= $filterData['id'] ?>"><?= ucfirst($filterData['title']) ?></label>
             <?php } } ?>
-        </div>
+        </form>
     </div>
 </div>
 
 <!-- Cards initialization -->
 <div class="container">
-    <div class="row py-5">
-        <?php 
-        $stmt = DB::connect()->query("SELECT `books`.*, `authors`.`name`, `authors`.`surname`, `categories`.`title` as category_title 
-        FROM `books`
-        JOIN `authors` ON `books`.`existing_author_id` = `authors`.`id`
-        JOIN `categories` ON `books`.`category` = `categories`.`id` WHERE 1");
-
-        if ($stmt->rowCount() == 0) {
-            echo "<div class='alert alert-warning' role='alert'>There aren't any book yet in our database, please change filter or try again later..</div>";
-        } else { while($bookData = $stmt->fetch()) { ?>
-            <div class="col-12 col-md-4 mt-3">
-                <div class="book text-light card-has-bg click-col" style="background-image:url('<?= $bookData['cover_image'] ?>');">
-                    <img class="card-img d-none" src="<?= $bookData['cover_image'] ?>" />
-                    <div class="card-img-overlay d-flex flex-column">
-                        <div class="card-body">
-                            <small class="text-warning mb-2"><?= $bookData['name'] . " " . $bookData['surname'] ?></small>
-                            <a href="<?= PATH . "book/" . $bookData['code'] ?>" class="h4 d-block mt-0 text-light "><?= $bookData['title'] ?></a>
-                            <small><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmarks" viewBox="0 0 16 16">
-                                    <path d="M2 4a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v11.5a.5.5 0 0 1-.777.416L7 13.101l-4.223 2.815A.5.5 0 0 1 2 15.5V4zm2-1a1 1 0 0 0-1 1v10.566l3.723-2.482a.5.5 0 0 1 .554 0L11 14.566V4a1 1 0 0 0-1-1H4z" />
-                                    <path d="M4.268 1H12a1 1 0 0 1 1 1v11.768l.223.148A.5.5 0 0 0 14 13.5V2a2 2 0 0 0-2-2H6a2 2 0 0 0-1.732 1z" />
-                                </svg> <?= ucfirst($bookData['category_title']) ?></small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <?php } } ?>
-    </div>
+    <div class="row py-5" id="list_books"></div>
 </div>
 
 <?php require_once __DIR__ . "/../layouts/footer.php"; ?>
 <?php require_once __DIR__ . "/../layouts/scripts.php"; ?>
 <script src="<?= PATH . "source/assets/js/footer.js" ?>"></script>
+<script type="module" src="<?= PATH . "source/assets/js/modules.js" ?>"></script>
+<script type="module" src="<?= PATH . "source/assets/js/filter.js" ?>"></script>
