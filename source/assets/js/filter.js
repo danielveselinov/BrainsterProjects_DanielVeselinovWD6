@@ -10,13 +10,17 @@ $(function() {
 
         if ($(this).is(':checked')) {
             filterArr.push(filter);
-        }
-        else {
+        } else {
             let index = filterArr.indexOf(filter);
             if ((index = filterArr.indexOf(filter)) !== -1) {
                 filterArr.splice(index, 1);
             }
         }
+
+        if (isNaN(filter)) {
+            return
+        }
+
         $.post(path + 'source/layouts/books.filter.php', {
             filterArr
         }).then((response) => {
