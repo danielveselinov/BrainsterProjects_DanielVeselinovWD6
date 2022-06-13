@@ -8,24 +8,16 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navBarExpand">
-            <ul class="navbar-nav m-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link text-uppercase small active" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-uppercase small" href="#">Link</a>
-                </li>
-            </ul>
             <?php
                 use BLibrary\Auth\Auth;
 
                 if (Auth::isLogged() && Auth::isAdmin()) {
                     echo '<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="btn btn-primary" href="'. route("dashboard") .'">Dashboard</a>
+                            <a class="btn btn-warning" href="'. route("dashboard") .'">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-outline-primary ms-lg-3 mt-3 mt-lg-0" href="'. route("logout") .'">Logout</a>
+                            <a class="btn btn-outline-warning ms-lg-3 mt-3 mt-lg-0" href="'. route("logout") .'">Logout</a>
                         </li>
                     </ul>';     
                 } else if (Auth::isLogged()) { 
@@ -34,16 +26,16 @@
                             <a class="nav-link text-uppercase small disabled" href="#">Logged in as '. Auth::user() .'</a>
                         </li>    
                         <li class="nav-item">
-                            <a class="btn btn-outline-primary" href="'. route("logout") .'">Logout</a>
+                            <a class="btn btn-outline-warning" href="'. route("logout") .'">Logout</a>
                         </li>
                     </ul>';
                  } else {
                     echo '<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="btn btn-primary" href="'. route("login") .'">Sign In</a>
+                        <a class="btn btn-outline-warning" href="'. route("login") .'">Sign In</a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-primary ms-lg-3 mt-3 mt-lg-0" href="'. route("register") .'">Sign Up</a>
+                        <a class="btn btn-warning ms-lg-3 mt-3 mt-lg-0" href="'. route("register") .'">Sign Up</a>
                     </li>
                 </ul>';
                 }

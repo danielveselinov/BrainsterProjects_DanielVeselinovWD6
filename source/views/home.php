@@ -19,7 +19,7 @@ use BLibrary\Database\Connection\DB;
                 echo "<p class='small text-uppercase mt-3 bg-danger text-light p-1 rounded'>nothing found</p>";
             } else { while($filterData = $stmt->fetch()) { ?>
                 <input type="checkbox" class="btn-check m-2 filter-checkbox" id="categoryFilter<?= $filterData['id'] ?>" name="categoryFilter" data-category="<?= $filterData['id'] ?>" autocomplete="off">
-                <label class="btn btn-danger m-2" for="categoryFilter<?= $filterData['id'] ?>"><?= ucfirst($filterData['title']) ?></label>
+                <label class="btn btn-outline-secondary m-2" for="categoryFilter<?= $filterData['id'] ?>"><?= ucfirst($filterData['title']) ?></label>
             <?php } } ?>
         </form>
     </div>
