@@ -11,7 +11,7 @@ JOIN `categories` ON `books`.`category` = `categories`.`id` WHERE `books`.`code`
 $stmt->execute([Router::get(3)]);
 
 if ($stmt->rowCount() == 0) {
-    redirect(route('home'));
+    redirect(route('404'));
 }
 
 $bookData = $stmt->fetch();
@@ -114,7 +114,7 @@ if (Router::get(3) == $bookData['code'] && Router::get(4) == 'edit') {
             <div class="col-12 col-md-6">
                 <p class="fs-2 fw-bold mb-0"><?= $bookData['title'] ?></p>
                 <p class="fs-4 lead mb-0"><?= $bookData['name'] . " " . $bookData['surname'] ?></p>
-                <p class="fs-6 lead mb-0">Category: <strong><?= ucfirst($bookData['category_title']) ?></strong></p>
+                <p class="fs-6 lead mb-0">Category: <strong><?= htmlspecialchars(ucfirst($bookData['category_title'])) ?></strong></p>
                 <p class="fs-6 lead mb-0">Originally published: <strong><?= $bookData['published'] ?></strong></p>
                 <p class="fs-6 lead mb-0">Pages: <strong><?= $bookData['pages'] ?></strong></p>
 
@@ -146,7 +146,7 @@ if (Router::get(3) == $bookData['code'] && Router::get(4) == 'edit') {
                                         } ?>
                                         <h5 class="fw-bold text-primary mb-1"><?= $commentsData['fullname'] ?></h5>
                                         <p class="text-muted small mb-0"><?= $commentsData['created_at'] ?></p>
-                                        <p class="mt-3 mb-0"><?= $commentsData['comment'] ?></p>
+                                        <p class="mt-3 mb-0"><?= htmlspecialchars($commentsData['comment']) ?></p>
                                     </div>
                                 <?php } else if (!$commentsData['is_approved'] && Auth::id() == $commentsData['existing_user_id']) { ?>
                                     <div class="card-body border-bottom" id="comment<?= $commentsData['id'] ?>" style="background-color: #ffb7b7;">
@@ -157,7 +157,7 @@ if (Router::get(3) == $bookData['code'] && Router::get(4) == 'edit') {
                                         } ?>
                                         <h5 class="fw-bold text-primary mb-1"><?= $commentsData['fullname'] ?></h5>
                                         <p class="text-muted small mb-0"><?= $commentsData['created_at'] ?></p>
-                                        <p class="mt-3 mb-0"><?= $commentsData['comment'] ?></p>
+                                        <p class="mt-3 mb-0"><?= htmlspecialchars($commentsData['comment']) ?></p>
                                     </div>
                     <?php }
                             }
@@ -224,7 +224,7 @@ if (Router::get(3) == $bookData['code'] && Router::get(4) == 'edit') {
                                     <div id="collapse<?= $notesData['id'] ?>" class="accordion-collapse collapse" data-bs-parent="#accordion<?= $notesData['id'] ?>">
                                         <div class="accordion-body">
                                             <div class="form-floating">
-                                                <textarea class="form-control" placeholder="Leave a note here" id="noteContent<?= $notesData['id'] ?>" style="height: 100px; resize: none;"><?= $notesData['note_text'] ?></textarea>
+                                                <textarea class="form-control" placeholder="Leave a note here" id="noteContent<?= $notesData['id'] ?>" style="height: 100px; resize: none;"><?= htmlspecialchars($notesData['note_text']) ?></textarea>
                                                 <label for="noteContent">Leave a note here</label>
                                             </div>
                                         </div>
