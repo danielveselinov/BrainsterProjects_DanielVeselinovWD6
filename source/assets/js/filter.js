@@ -20,7 +20,7 @@ $(function() {
         if (isNaN(filter)) {
             return
         }
-
+        
         $.post(path + 'source/layouts/books.filter.php', {
             filterArr
         }).then((response) => {

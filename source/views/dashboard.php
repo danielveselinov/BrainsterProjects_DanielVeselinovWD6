@@ -38,7 +38,7 @@ require_once __DIR__ . "/../layouts/navbar.php"; ?>
                         <div class="card text-light bg-danger mt-2 pb-3">
                             <div class="card-body">
                                 <p class="fs-3 fw-bold mb-0">
-                                <?php $stmt = DB::connect()->query("SELECT id FROM `users` WHERE 1"); ?>
+                                <?php $stmt = DB::connect()->query("SELECT id as total FROM `users` WHERE 1"); ?>
                                 <?= $stmt->rowCount() ?></p>
                                 <p class="fs-6 fw-light text-uppercase mb-0">users</p>
                             </div>

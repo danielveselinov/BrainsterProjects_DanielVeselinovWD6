@@ -9,27 +9,11 @@ JOIN `authors` ON `books`.`existing_author_id` = `authors`.`id`
 JOIN `categories` ON `books`.`category` = `categories`.`id` WHERE 1 ";
 
 if (isset($_POST['filterArr']) && $_POST['filterArr'] != "") {
-
-    /**
-     * Go ostavam ovoj komentar vaka bidejki nesaka da raboti.. 
-     * Dokolku ostavam :category, a podolu namestam so bindValue
-     * togas selektira samo primer kategorija so ID 10, ne gi zema
-     * site.. taka sto ne raboti filterot, momentalno e ova resenie. 
-     * Ne zavisno od toa dali koristam :category ili ? sekogas raboti
-     * samo na edna kategorija od nizata..
-     */
-    // $sql .= 'AND category IN (:category) ';
     $sql .= 'AND category IN ('. join(",", $_POST['filterArr']) .') ';
-    
 }
 
 try {
     $stmt = DB::connect()->prepare($sql);
-
-    // if (isset($_POST['filterArr']) && $_POST['filterArr'] != "") {
-    //     $stmt->bindValue(':category', join(",", $_POST['filterArr']), PDO::PARAM_INT);
-    // }
-
     $stmt->execute(); 
 
     if ($stmt->rowCount() == 0) {
