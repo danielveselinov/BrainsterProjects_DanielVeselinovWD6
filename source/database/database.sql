@@ -8,7 +8,7 @@ create TABLE `users`(
 
 ALTER TABLE `users` ADD `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `is_admin`;
 
-insert into users(fullname, email, password) VALUES('John Doe', 'admin@library.com', '$2y$10$Xwjc0RhdaJ8KpFxDdYOp0.X7AjoTDonGbDkbWzEwxRAzgkwxtEJZO');
+insert into users(fullname, email, password, is_admin) VALUES('John Doe', 'admin@library.com', '$2y$10$Xwjc0RhdaJ8KpFxDdYOp0.X7AjoTDonGbDkbWzEwxRAzgkwxtEJZO', '1');
 
 create TABLE `categories`(
 	id int unsigned PRIMARY KEY AUTO_INCREMENT,

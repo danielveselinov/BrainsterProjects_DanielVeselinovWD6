@@ -17,7 +17,7 @@ try {
     $stmt->execute(); 
 
     if ($stmt->rowCount() == 0) {
-        echo "<div class='alert alert-warning' role='alert'>There aren't any book yet in our database, please change filter or try again later..</div>";
+        echo "<div class='alert' role='alert'>No books were found!</div>";
     } else { while($bookData = $stmt->fetch()) { ?>
         <div class="col-12 col-md-4 mt-3">
             <div class="book text-light card-has-bg click-col" style="background-image:url('<?= $bookData['cover_image'] ?>');">
