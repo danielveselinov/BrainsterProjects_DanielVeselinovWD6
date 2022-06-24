@@ -3,7 +3,7 @@ create TABLE `users`(
     fullname varchar(64) not null,
     email varchar(128) not null,
     password varchar(244),
-    is_admin tinyint not null
+    is_admin tinyint not null default '0'
 );
 
 ALTER TABLE `users` ADD `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `is_admin`;
@@ -35,7 +35,7 @@ create TABLE `books`(
     pages smallint unsigned not null,
     cover_image text not null,
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    code varchat(24) not null,
+    code varchar(24) not null,
     
     FOREIGN KEY(existing_author_id) REFERENCES `authors`(id),
     FOREIGN KEY(category) REFERENCES `categories`(id)
