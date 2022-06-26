@@ -1,5 +1,5 @@
 $(function () {
-    $.get(`http://api.quotable.io/random`)
+    $.get(`https://api.quotable.io/random`)
     .then(function (quote) {
         $('#quoteError').html(`
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-quote" viewBox="0 0 16 16">
