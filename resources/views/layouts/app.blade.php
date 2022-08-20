@@ -17,12 +17,10 @@
     @vite(['resources/css/style.css', 'resources/js/app.js'])
 </head>
 
-<body>
+<body id="@yield('background')">
     @include('components.navigation')
     
-    <div class="container">
-        @yield('content')
-    </div>
+    @yield('content')
 
     @include('components.scripts')
 
