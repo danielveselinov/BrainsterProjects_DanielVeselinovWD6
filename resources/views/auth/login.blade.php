@@ -1,56 +1,44 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+@extends('layouts.guest')
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+@section('background', 'login')
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+@section('content')
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-8">
+            <div class="d-flex flex-column justify-content-center vh-100">
+                <p class="fw-bold fs-1 mb-5"><span class="text-black">BRAINSTER</span><span class="text-gray">PRENEURS</span></p>
+                <p class="fs-4 fw-semibold">Propel your ides to life!</p>
             </div>
+        </div>
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+        <div class="col-12 col-md-4">
+            <form action="{{ route('login') }}" method="POST" class="d-flex flex-column justify-content-center vh-100">
+                @csrf
+                @method('POST')
+                <div class="h1 fw-bolder">Login</div>
 
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-            </div>
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" placeholder="name@example.com">
+                    <label for="email">Email address</label>
+                    @error('email')
+                    <div class="small text-red mb-0">{{ $message }}</div>
+                    @enderror
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="password" name="password" value="{{ old('password') }}" placeholder="Password">
+                    <label for="password">Password</label>
+                    @error('password')
+                    <div class="small text-red mb-0">{{ $message }}</div>
+                    @enderror
+                </div>
 
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+                <button type="submit" class="btn bg-orange text-white fw-semibold text-uppercase mb-4">Login</button>
+                <div class="mb-0">Don't have an account?
+                    <a href="{{ route('register') }}" class="text-gray">Register here!</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection

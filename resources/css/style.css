@@ -1,0 +1,76 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+*:focus {
+    outline: none !important;
+    box-shadow: none !important
+}
+
+.text-green {
+    color: #48695c !important;
+}
+
+.bg-green {
+    background-color: #48695c !important;
+}
+
+.text-orange {
+    color: #dd7f1e !important;
+}
+
+.bg-orange {
+    background-color: #dd7f1e !important;
+}
+
+.text-gray {
+    color: #949d99 !important;
+}
+
+.bg-gray {
+    background-color: #48695c !important;
+}
+
+.text-white {
+    color: #f6f6f6 !important;
+}
+
+.bg-white {
+    background-color: #f6f6f6 !important;
+}
+
+.text-black {
+    color: #000000 !important;
+}
+
+.bg-black {
+    background-color: #000000 !important;
+}
+
+.text-red {
+    color: #ff5757 !important;
+}
+
+.bg-red {
+    background-color: #ff5757 !important;
+}
+
+.btn-xl {
+    padding: 0.8rem 2.5rem !important;
+    font-size: 1.2rem !important;
+}
+
+.form-control {
+    border: none !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid #000000 !important;
+    background-color: transparent !important;
+}
+
+#login {
+    background: url(./../../public/images/backgrounds/loginBackground.jpg) no-repeat center / cover;
+}
+
+#register {
+    background: url(./../../public/images/backgrounds/registerBackground.jpg) no-repeat center / cover;
+}
