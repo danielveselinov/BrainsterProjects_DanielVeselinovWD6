@@ -1,21 +1,16 @@
-<!-- koga ke e url - profile, togas menuto, inaku samo slika -->
 <header class="p-3 mb-3 border-orange border-3 border-bottom">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="#" class="fw-bold fs-5 text-decoration-none"><span class="text-black">BRAINSTER</span><span class="text-gray">PRENEURS</span></a>
+            <a href="{{ route('dashboard') }}" class="fw-bold fs-5 text-decoration-none"><span class="text-black">BRAINSTER</span><span class="text-gray">PRENEURS</span></a>
             </a>
 
-            <!-- if route == link, then link-seconday ? link-dark -->
-
-            @if (Auth::user()->completed)
             <ul class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link mx-1 fw-semibold link-secondary">My Projects</a></li>
-                <li><a href="#" class="nav-link mx-1 fw-semibold link-dark">My Applications</a></li>
-                <li><a href="#" class="nav-link mx-1 fw-semibold link-dark">My Profile</a></li>
+                <li><a href="{{ route('projects.index') }}" class="nav-link me-1 fw-semibold {{ (request()->routeIs('projects.index')) ? 'link-secondary' : 'link-dark' }}">My Projects</a></li>
+                <li><a href="#" class="nav-link me-1 fw-semibold link-dark">My Applications</a></li>
+                <li><a href="{{ route('profile.index') }}" class="nav-link me-1 fw-semibold {{ (request()->routeIs('profile.index')) ? 'link-secondary' : 'link-dark' }}">My Profile</a></li>
             </ul>
-            @endif
             
-            <div class="dropdown text-end @if (!Auth::user()->completed) ms-lg-auto @endif">
+            <div class="dropdown text-end">
                 <a href="#" class="d-block link-dark text-decoration-none" data-bs-toggle="dropdown">
                     <img src="{{ Auth::user()->setAvatar() }}" alt="{{ Auth::user()->name . ' ' . Auth::user()->surname }}" width="35" height="35" class="rounded-circle">
                 </a>

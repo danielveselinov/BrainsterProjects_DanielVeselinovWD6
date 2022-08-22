@@ -20,6 +20,8 @@
 <body id="@yield('background')">
     @include('components.navigation')
     
+    @include('components.not-completed-alert')
+
     @yield('content')
 
     @include('components.scripts')

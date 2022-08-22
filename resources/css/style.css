@@ -69,7 +69,7 @@
 }
 
 .small-xl {
-    font-size: 12px !important;
+    font-size: 10px !important;
 }
 
 .form-control {
@@ -92,6 +92,11 @@
     min-height: 100vh;
 }
 
+#project {
+    background: url(./../../public/images/backgrounds/projectBackground.jpg) no-repeat center / cover;
+    min-height: 100vh;
+}
+
 .card-circle {
     top: -35px;
     right: 25px;
@@ -108,4 +113,26 @@
 .card-image {
     top: -45px;
     left: 60px;
+}
+
+.form-check-box {
+    text-align: center;
+    width: 100px;
+    height: 100px;
+}
+
+.form-check-box:hover {
+    cursor: pointer;
+    color: #f6f6f6;
+    background-color: #48695c !important;
+}
+
+.filters {
+    position: sticky;
+    top: 20px;
+}
+
+.badge-pos {
+    right: 35px;
+    bottom: -20px;
 }
