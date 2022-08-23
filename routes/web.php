@@ -22,7 +22,7 @@ Route::middleware(['auth'])->group(function() {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('profile', ProfileController::class)->except(['create', 'store', 'edit', 'destroy']);
     Route::resource('projects', ProjectController::class)->except(['show'])->middleware(['completed']); 
-    Route::resource('applications', ApplicationController::class)->middleware(['completed']); 
+    Route::resource('applications', ApplicationController::class)->except(['create'])->middleware(['completed']); 
 });
 
 require __DIR__.'/auth.php';

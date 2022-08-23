@@ -56,16 +56,16 @@
                                 <p class="fs-5 fw-semibold">{{ $project->name }}</p>
                                 <div class="card-text">
                                     @if (strlen($project->description) > 120)
-                                    <span id="short_bio">{{ Str::limit($project->description, 120) }}</span>
-                                    <span id="long_bio" style="display: none;">{{ $project->description }}</span>
-                                    <a id="show_more" href="#" class="text-orange small text-end">show more</a>
+                                    <span id="short_bio{{ $project->id }}">{{ Str::limit($project->description, 120) }}</span>
+                                    <span id="long_bio{{ $project->id }}" style="display: none;">{{ $project->description }}</span>
+                                    <a id="show_more" data-id="{{ $project->id }}" href="#" class="text-orange small text-end">show more</a>
                                     @else
                                     {{ $project->description }}
                                     @endif
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="position-absolute card-circle bg-green text-white text-decoration-none pointer fw-semibold">10<br>Applicants</a>
+                        <a href="{{ route('applications.show', $project->id) }}" class="position-absolute card-circle bg-green text-white text-decoration-none pointer fw-semibold">{{ $project->applications->count() }}<br>Applicants</a>
                     </div>
                 </div>
                 @if ($project->assembled)
@@ -84,11 +84,13 @@
 @section('scripts')
     <script>
         $(function() {
-            $('#show_more').on('click', function(e) {
+            $('body').on('click', '#show_more', function(e) {
                 e.preventDefault()
-                $('#short_bio').fadeOut()
-                $('#show_more').fadeOut()
-                $('#long_bio').fadeIn()
+
+                let id = $(this).attr('data-id')
+
+                $(`#short_bio${id}`).fadeOut()
+                $(`#long_bio${id}`).fadeIn()
             })
         })
     </script>

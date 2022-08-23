@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('accepted')->nullable();
-            $table->string('description');
+            $table->text('description');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

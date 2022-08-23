@@ -24,9 +24,16 @@
                 <img src="{{ asset('images/icons/3.png') }}" width="40" height="40" alt="...">
                 <p class="fs-5 fw-semibold">Checkout the latest projects</p>
             </div>
-    
+
+            
             <div class="row g-2" id="projects">
                 @forelse ($projects as $project)
+                @php
+                $korisnik = [];
+                foreach ($project->applications as $profil) { 
+                    array_push($korisnik, $profil->id); 
+                }
+                @endphp
                 <div class="card mt-5 mb-4 position-relative">
                     <div class="row g-0">
                         <div class="col-md-3 pt-3">
@@ -50,23 +57,23 @@
                                 <div class="d-flex flex-column">
                                     <p class="fs-5 fw-semibold">{{ $project->name }}</p>
                                     <div class="card-text">
-                                    @if (strlen($project->description) > 120)
-                                        <span id="short_bio">{{ Str::limit($project->description, 120) }}</span>
-                                        <span id="long_bio" style="display: none;">{{ $project->description }}</span>
-                                        <a id="show_more" href="#" class="text-orange small text-end">show more</a>
-                                    @else
+                                        @if (strlen($project->description) > 120)
+                                        <span id="short_bio{{ $project->id }}">{{ Str::limit($project->description, 120) }}</span>
+                                        <span id="long_bio{{ $project->id }}" style="display: none;">{{ $project->description }}</span>
+                                        <a id="show_more" data-id="{{ $project->id }}" href="#" class="text-orange small text-end">show more</a>
+                                        @else
                                         {{ $project->description }}
-                                    @endif    
+                                        @endif
                                     </div>
-                                    <button {{ (Auth::id() == $project->user->id) ? 'disabled' : '' }} {{ (Auth::user()->completed) ? '' : 'disabled' }} class="btn bg-green text-light text-uppercase mt-4 w-50 ms-md-auto">I'm in</button>
+                                    <button data-project="{{ $project->id }}" {{ in_array(Auth::id(), $korisnik) ? 'disabled' : '' }} {{ (Auth::id() == $project->user->id) ? 'disabled' : '' }} {{ (Auth::user()->completed) ? '' : 'disabled' }} class="btn bg-green text-light text-uppercase mt-4 w-50 ms-md-auto imInBtn">I'm in</button>
                                 </div>
                             </div>
-                            <div class="position-absolute card-circle bg-green text-white fw-semibold">10<br>Applicants</div>
+                            <div class="position-absolute card-circle bg-green text-white fw-semibold">{{ $project->applications->count() }}<br>Applicants</div>
                         </div>
                     </div>
                 </div>
                 @empty
-                    <p class="text-gray">Nothing found!</p>
+                <p class="text-gray">Nothing found!</p>
                 @endforelse
 
                 {!! $projects->links() !!}
@@ -77,25 +84,76 @@
 @endsection
 
 @section('scripts')
-    <script>
-        $(function() {
+<script>
+    $(function() {
 
-            $('body').on('click', '.pagination a', function(e) {
-                e.preventDefault()
+        $('body').on('click', '.pagination a', function(e) {
+            e.preventDefault()
 
-                let url = $(this).attr('href')
+            let url = $(this).attr('href')
 
-                $.get(url, function(data) {
-                    $('#projects').html(data)
-                })
-            })
-
-            $('#show_more').on('click', function(e) {
-                e.preventDefault()
-                $('#short_bio').fadeOut()
-                $('#show_more').fadeOut()
-                $('#long_bio').fadeIn()
+            $.get(url, function(data) {
+                $('#projects').html(data)
             })
         })
-    </script>
+
+        $('body').on('click', '#show_more', function(e) {
+            e.preventDefault()
+
+            let id = $(this).attr('data-id')
+
+            $(`#short_bio${id}`).fadeOut()
+            $(`#long_bio${id}`).fadeIn()
+        })
+
+        $('body').on('click', '.imInBtn', function(e) {
+            e.preventDefault()
+
+            let id = $(this).attr('data-project')
+            
+            Swal.fire({
+                title: 'Apply for a project',
+                html: `
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Why do you want to apply?" id="description" name="description" style="height: 220px; resize:none;">{{ old('description') }}</textarea>
+                        <label for="description" class="text-start">Why do you want to apply?</label>
+                        @error('description')
+                        <div class="small text-red mb-0">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    `,
+                showCancelButton: true,
+                confirmButtonText: 'Apply',
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    let project_id = id
+                    let description = $('#description').val()
+
+                    $.ajax({
+                        method: 'POST',
+                        url: 'applications',
+                        data: {
+                            '_token': $('meta[name="csrf-token"]').attr('content'),
+                            project_id, description
+                        },
+                        success: (response) => {
+                            if (response === 'success') {
+                                Swal.fire('Successfully applied for this project', '', 'info').then((result) => {
+                                    if (result.isConfirmed) {
+                                        // $('#projects > div').fadeIn();
+                                    }
+                                })
+                            }
+                        },
+                        error: (error) => {
+                            let errors = error.responseJSON
+                            Swal.fire('Error', errors.message, 'error')
+                        }
+                    })
+                }
+            })
+        })
+    })
+</script>
 @endsection

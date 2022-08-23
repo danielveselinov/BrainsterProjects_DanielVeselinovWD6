@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ApplicationController extends Controller
 {
@@ -15,18 +16,8 @@ class ApplicationController extends Controller
     public function index()
     {
         return view('applications.index', [
-            // show if user actually applied to that project
+            // show only if user actually applied to that project
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -37,7 +28,24 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'description' => 'required|string',
+        ]);
+
+         $application = Application::create([
+            'user_id' => Auth::id(),
+            'project_id' => $request->project_id,
+            'description' => $request->description
+         ]);
+
+        if($application) {
+            // event(new InvitationEvent($user, $token));
+
+            return response()->json('success');
+        }
+
+        return response()->json('error', 400);
+
     }
 
     /**
