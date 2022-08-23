@@ -7,6 +7,7 @@ use App\Models\Academy;
 use App\Models\Skill;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class ProfileController extends Controller
@@ -48,13 +49,17 @@ class ProfileController extends Controller
      */
     public function update(UpdateUserProfileRequest $request, User $profile)
     {
+        if (Auth::id() != $profile->id) {
+            return to_route('projects.index')->with(['status' => true, 'message' => 'Can\'t update someone else\'s profile']);
+        }
+
         $imagePath = request('profile_picture')->store('uploads/profiles', 'public');
         File::delete(public_path('storage/' . $profile->profile_picture));
 
         $profile->name = $request->name;
         $profile->surname = $request->surname;
         $profile->biography = $request->biography;
-        $profile->academy = $request->academy;
+        $profile->academy_id = $request->academy;
         $profile->profile_picture = $imagePath;
         $profile->completed = 1;
 

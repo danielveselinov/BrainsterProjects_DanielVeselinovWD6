@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-md-12 mb-3">
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="Biography" id="biography" name="biography" value="{{ old('biography') }}" style="height: 220px; resize:none;"></textarea>
+                        <textarea class="form-control" placeholder="Biography" id="biography" name="biography" style="height: 220px; resize:none;">{{ old('biography') }}</textarea>
                         <label for="biography">Biography</label>
                         @error('biography')
                         <div class="small text-red mb-0">{{ $message }}</div>

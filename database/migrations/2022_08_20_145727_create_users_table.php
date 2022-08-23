@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('academy_id')->nullable();
             $table->string('name');
             $table->string('surname');
             $table->text('biography');
@@ -22,11 +23,10 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('profile_picture')->nullable();
-            $table->unsignedBigInteger('academy')->nullable();
             $table->boolean('completed')->default(0);
             $table->rememberToken();
             $table->timestamps();
-            $table->foreign('academy')->references('id')->on('academies');
+            $table->foreign('academy_id')->references('id')->on('academies');
         });
     }
 

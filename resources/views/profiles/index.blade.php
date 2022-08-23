@@ -86,7 +86,7 @@
                         @foreach ($academies as $academy)
                         <div class="d-inline-flex">
                             <input type="radio" class="form-check-input d-none" name="academy" value="{{ $academy->id }}" id="academy{{ $academy->id }}">
-                            <label id="academy{{ $academy->id }}" class="form-check-box d-flex flex-column align-items-center justify-content-center bg-light {{ (Auth::user()->academy == $academy->id) ? 'bg-green text-white' : 'bg-light' }} shadow-sm small border rounded-2 m-1" for="academy{{ $academy->id }}">
+                            <label id="academy{{ $academy->id }}" class="form-check-box d-flex flex-column align-items-center justify-content-center {{ (Auth::user()->academy_id == $academy->id) ? 'bg-green text-white' : 'bg-light' }} shadow-sm small border rounded-2 m-1" for="academy{{ $academy->id }}">
                                 {{ $academy->name }}
                             </label>
                         </div>
@@ -100,7 +100,7 @@
         </div>
 
         <div class="col-12 text-end">
-            <button id="edit_action" type="submit" class="btn text-white text-uppercase fw-semibold bg-green btn-xl mb-3 mb-lg-0">EDIT</button>
+            <button type="submit" class="btn text-white text-uppercase fw-semibold bg-green btn-xl mb-3 mb-lg-0">EDIT</button>
         </div>
     </form>
 </div>

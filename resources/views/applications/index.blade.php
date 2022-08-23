@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('background', 'project')
+@section('background', 'application')
 
 @section('content')
 <div class="container">
@@ -8,14 +8,7 @@
     <div class="alert alert-info">{{ session()->get('message') }}</div>
     @endif
     <div class="row py-4">
-        @if (Auth::user()->completed)
-        <div class="col-12">
-            <p class="fs-6 fw-semibold mb-0">Have a new idea to make the world better?</p>
-            <a href="{{ route('projects.create') }}" class="fs-3 text-decoration-none text-dark fw-semibold">Create new project
-                <img src="{{ asset('images/icons/1.png') }}" width="30" height="30" alt="...">
-            </a>
-        </div>
-
+        <!-- if accepted = null then status in progress, if not status declined , if yes okey :) -->
         <div class="col-12 col-md-8 offset-md-2 mt-4">
             @forelse ($projects as $project)
             <div class="card mt-5 mb-4 position-relative">
@@ -26,8 +19,7 @@
                 <form action="{{ route('projects.destroy', $project->id) }}" method="POST" class="position-absolute options">
                     @csrf
                     @method('DELETE')
-                    <a href="{{ route('projects.destroy', $project->id) }}" class="position-absolute options"
-                                                onclick="event.preventDefault();
+                    <a href="{{ route('projects.destroy', $project->id) }}" class="position-absolute options" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                         <img src="{{ asset('images/icons/7.png') }}" width="40" height="40" alt="...">
                     </a>
@@ -69,27 +61,12 @@
                     </div>
                 </div>
                 @if ($project->assembled)
-                    <img src="{{ asset('images/icons/badge.png') }}" class="position-absolute badge-pos" width="40" height="40" alt="...">
+                <img src="{{ asset('images/icons/badge.png') }}" class="position-absolute badge-pos" width="40" height="40" alt="...">
                 @endif
             </div>
             @empty
             <p class="text-gray">Nothing found!</p>
             @endforelse
         </div>
-        @endif
     </div>
-</div>
-@endsection
-
-@section('scripts')
-    <script>
-        $(function() {
-            $('#show_more').on('click', function(e) {
-                e.preventDefault()
-                $('#short_bio').fadeOut()
-                $('#show_more').fadeOut()
-                $('#long_bio').fadeIn()
-            })
-        })
-    </script>
-@endsection
+    @endsection

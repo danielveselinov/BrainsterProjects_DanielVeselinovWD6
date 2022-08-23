@@ -34,14 +34,14 @@
 
                             <div class="mt-5 text-center">
                                 <p class="fw-semibold">{{ $project->user->name }} {{ $project->user->surname }}</p>
-                                <p class="fw-semibold text-orange">I'm {{ $project->user->academy }}</p>
+                                <p class="fw-semibold text-orange small">I'm {{ $project->user->academy->display }}</p>
                             </div>
 
                             <p class="small-xl fw-semibold text-center pt-3">I'm looking for:</p>
 
                             <div class="d-flex">
                                 @foreach ($project->profiles as $aprofile)
-                                <div class="small-xl mx-1 bg-green text-white shadow-sm rounded-5 p-1 d-flex flex-column align-items-center justify-content-center text-center">{{ $aprofile->name }}</div>
+                                <div class="small-xl mx-1 bg-green text-white shadow-sm rounded-5 p-1 d-flex flex-column align-items-center justify-content-center text-center">{{ $aprofile->display }}</div>
                                 @endforeach
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                                         {{ $project->description }}
                                     @endif    
                                     </div>
-                                    <button {{ (Auth::user()->completed) ? '' : 'disabled' }} class="btn bg-green text-light text-uppercase mt-4 w-50 ms-md-auto">I'm in</button>
+                                    <button {{ (Auth::id() == $project->user->id) ? 'disabled' : '' }} {{ (Auth::user()->completed) ? '' : 'disabled' }} class="btn bg-green text-light text-uppercase mt-4 w-50 ms-md-auto">I'm in</button>
                                 </div>
                             </div>
                             <div class="position-absolute card-circle bg-green text-white fw-semibold">10<br>Applicants</div>

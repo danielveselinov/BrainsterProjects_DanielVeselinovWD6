@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
@@ -16,17 +17,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return to_route('login');
-});
-
+Route::get('/', function () { return to_route('login'); });
 Route::middleware(['auth'])->group(function() {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
     Route::resource('profile', ProfileController::class)->except(['create', 'store', 'edit', 'destroy']);
-    Route::resource('projects', ProjectController::class); // protect routes if user is not completed
+    Route::resource('projects', ProjectController::class)->except(['show'])->middleware(['completed']); 
+    Route::resource('applications', ApplicationController::class)->middleware(['completed']); 
 });
-
-
 
 require __DIR__.'/auth.php';

@@ -6,7 +6,7 @@
 
             <ul class="nav col-12 col-lg-auto ms-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="{{ route('projects.index') }}" class="nav-link me-1 fw-semibold {{ (request()->routeIs('projects.index')) ? 'link-secondary' : 'link-dark' }}">My Projects</a></li>
-                <li><a href="#" class="nav-link me-1 fw-semibold link-dark">My Applications</a></li>
+                <li><a href="{{ route('applications.index') }}" class="nav-link me-1 fw-semibold {{ (request()->routeIs('applications.index')) ? 'link-secondary' : 'link-dark' }}">My Applications</a></li>
                 <li><a href="{{ route('profile.index') }}" class="nav-link me-1 fw-semibold {{ (request()->routeIs('profile.index')) ? 'link-secondary' : 'link-dark' }}">My Profile</a></li>
             </ul>
             

@@ -9,6 +9,8 @@ class Project extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function profiles()
     {
         return $this->belongsToMany(Academy::class);
@@ -17,5 +19,10 @@ class Project extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
     }
 }

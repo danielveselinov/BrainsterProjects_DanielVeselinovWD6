@@ -7,6 +7,10 @@
     box-shadow: none !important
 }
 
+.pointer {
+    cursor: pointer !important;
+}
+
 .text-green {
     color: #48695c !important;
 }
@@ -97,6 +101,11 @@
     min-height: 100vh;
 }
 
+#application {
+    background: url(./../../public/images/backgrounds/projectBackground.jpg) no-repeat center / cover;
+    min-height: 100vh;
+}
+
 .card-circle {
     top: -35px;
     right: 25px;
@@ -135,4 +144,15 @@
 .badge-pos {
     right: 35px;
     bottom: -20px;
+}
+
+.options {
+    padding: 20px;
+    display: none;
+    top: 50%;
+    right: -75px;
+    transform: translateY(-50%);
+}
+.card.position-relative:hover .options {
+    display: block;
 }

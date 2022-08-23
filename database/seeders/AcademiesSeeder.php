@@ -15,10 +15,18 @@ class AcademiesSeeder extends Seeder
      */
     public function run()
     {
-        $academies = ['Marketing', 'Frontend Development', 'Backend Development', 'Data Science', 'Design', 'QA', 'UX/UI'];
+        $academies = [
+            'Marketing' => 'Marketer', 
+            'Frontend Development' => 'Frontend Developer', 
+            'Backend Development' => 'Backend Developer', 
+            'Data Science' => 'Data Scientist', 
+            'Design' => 'Designer', 
+            'QA' => 'QA', 
+            'UX/UI' => 'UX/UI Designer'
+        ];
 
-        foreach ($academies as $academy) {
-            Academy::create(['name' => $academy]);
+        foreach ($academies as $academy => $display) {
+            Academy::create(['name' => $academy, 'display' => $display]);
         }
     }
 }

@@ -61,6 +61,11 @@ class User extends Authenticatable
         return $this->hasMany(Project::class);
     }
 
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
+
     public function setAvatar()
     {
         $imagePath = ($this->profile_picture) ? "/storage/{$this->profile_picture}" : asset('images/default_avatar.png');
