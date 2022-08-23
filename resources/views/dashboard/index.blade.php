@@ -25,7 +25,7 @@
                 <p class="fs-5 fw-semibold">Checkout the latest projects</p>
             </div>
     
-            <div class="row g-2">
+            <div class="row g-2" id="projects">
                 @forelse ($projects as $project)
                 <div class="card mt-5 mb-4 position-relative">
                     <div class="row g-0">
@@ -68,6 +68,8 @@
                 @empty
                     <p class="text-gray">Nothing found!</p>
                 @endforelse
+
+                {!! $projects->links() !!}
             </div>
         </div>
     </div>
@@ -77,6 +79,17 @@
 @section('scripts')
     <script>
         $(function() {
+
+            $('body').on('click', '.pagination a', function(e) {
+                e.preventDefault()
+
+                let url = $(this).attr('href')
+
+                $.get(url, function(data) {
+                    $('#projects').html(data)
+                })
+            })
+
             $('#show_more').on('click', function(e) {
                 e.preventDefault()
                 $('#short_bio').fadeOut()

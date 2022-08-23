@@ -156,3 +156,13 @@
 .card.position-relative:hover .options {
     display: block;
 }
+
+.pagination .active>.page-link {
+    color: #f6f6f6 !important;
+    background-color: #48695c !important;
+    border-color: #48695c !important;
+}
+
+.pagination .page-link {
+    color: #000000 !important;
+}
