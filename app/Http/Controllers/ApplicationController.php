@@ -53,11 +53,14 @@ class ApplicationController extends Controller
      * @param  \App\Models\Application  $application
      * @return \Illuminate\Http\Response
      */
-    public function show(Application $application)
+    public function show(Project $application)
     {
-        dd($application);
+        if (Auth::id() != $application->user_id) {
+            return to_route('projects.index');
+        }
+
         return view('applications.show', [
-            'application' => $application
+            'projects' => $application
         ]);
     }
 

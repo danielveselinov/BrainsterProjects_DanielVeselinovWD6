@@ -68,7 +68,7 @@
                         @endphp
                         @foreach ($skills as $skill)
                         <div class="col-2">
-                            <input type="checkbox" class="form-check-input d-none" name="skill[]" value="{{ $skill->id }}" id="skill{{ $skill->id }}">
+                            <input type="checkbox" class="form-check-input d-none" name="skill[]" value="{{ $skill->id }}" id="skill{{ $skill->id }}" {{ (in_array($skill->id, $vestini)) ? 'checked' : '' }}>
                             <label id="skill{{ $skill->id }}" class="form-check-box d-flex flex-column align-items-center justify-content-center {{ (in_array($skill->id, $vestini)) ? 'bg-green text-white' : 'bg-light' }} shadow-sm small border rounded-2 m-1" for="skill{{ $skill->id }}">
                                 {{ $skill->name }}
                             </label>
@@ -85,7 +85,7 @@
                     <div class="d-flex academies" style="overflow-x: auto;">
                         @foreach ($academies as $academy)
                         <div class="d-inline-flex">
-                            <input type="radio" class="form-check-input d-none" name="academy" value="{{ $academy->id }}" id="academy{{ $academy->id }}">
+                            <input type="radio" class="form-check-input d-none" name="academy" value="{{ $academy->id }}" id="academy{{ $academy->id }}" {{ (Auth::user()->academy_id == $academy->id) ? 'checked' : '' }}>
                             <label id="academy{{ $academy->id }}" class="form-check-box d-flex flex-column align-items-center justify-content-center {{ (Auth::user()->academy_id == $academy->id) ? 'bg-green text-white' : 'bg-light' }} shadow-sm small border rounded-2 m-1" for="academy{{ $academy->id }}">
                                 {{ $academy->name }}
                             </label>
