@@ -31,7 +31,7 @@
                 @php
                 $korisnik = [];
                 foreach ($project->applications as $profil) { 
-                    array_push($korisnik, $profil->id); 
+                    array_push($korisnik, $profil->user_id); 
                 }
                 @endphp
                 <div class="card mt-5 mb-4 position-relative">
@@ -68,7 +68,7 @@
                                     <button data-project="{{ $project->id }}" {{ in_array(Auth::id(), $korisnik) ? 'disabled' : '' }} {{ (Auth::id() == $project->user->id) ? 'disabled' : '' }} {{ (Auth::user()->completed) ? '' : 'disabled' }} class="btn bg-green text-light text-uppercase mt-4 w-50 ms-md-auto imInBtn">I'm in</button>
                                 </div>
                             </div>
-                            <div class="position-absolute card-circle bg-green text-white fw-semibold">{{ $project->applications->count() }}<br>Applicants</div>
+                            <div id="apps_count{{ $project->id }}" data-count="{{ $project->applications->count() }}" class="position-absolute card-circle bg-green text-white fw-semibold">{{ $project->applications->count() }}<br>Applicants</div>
                         </div>
                     </div>
                 </div>
@@ -141,7 +141,10 @@
                             if (response === 'success') {
                                 Swal.fire('Successfully applied for this project', '', 'info').then((result) => {
                                     if (result.isConfirmed) {
-                                        // $('#projects > div').fadeIn();
+                                        let curr = $(`#apps_count${project_id}`).attr('data-count')
+                                        curr++
+                                        $(`#apps_count${project_id}`).html(`${curr}<br>Applicants`)
+                                        $(this).prop('disabled', true)
                                     }
                                 })
                             }

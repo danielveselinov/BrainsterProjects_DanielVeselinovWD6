@@ -8,8 +8,10 @@
     <div class="alert alert-info">{{ session()->get('message') }}</div>
     @endif
     <div class="row py-4">
-        <!-- if accepted = null then status in progress, if not status declined , if yes okey :) -->
-        
+        {{-- dd(Auth::user()->applications) --}}
+        <div class="col-12 col-md-8 offset-md-2 mt-4">
+            <!-- if accepted = null then status in progress, if not status declined , if yes okey :) -->   
         </div>
     </div>
-    @endsection
+</div>
+@endsection

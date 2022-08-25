@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,9 +16,7 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        return view('applications.index', [
-            // show only if user actually applied to that project
-        ]);
+        return view('applications.index');
     }
 
     /**
@@ -56,7 +55,10 @@ class ApplicationController extends Controller
      */
     public function show(Application $application)
     {
-        //
+        dd($application);
+        return view('applications.show', [
+            'application' => $application
+        ]);
     }
 
     /**
