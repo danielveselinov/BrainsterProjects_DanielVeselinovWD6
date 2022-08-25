@@ -16,7 +16,14 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        return view('applications.index');
+        // take only project that user have applied for
+        $projects = Project::all();
+
+        dd($projects->applications);
+
+        return view('applications.index', [
+            'projects' => $projects
+        ]);
     }
 
     /**
