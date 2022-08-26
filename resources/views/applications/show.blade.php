@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('background', 'application')
-
 @section('content')
 <div class="container">
     @if (session()->has('status'))

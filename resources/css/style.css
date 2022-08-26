@@ -102,7 +102,7 @@
 }
 
 #application {
-    background: url(./../../public/images/backgrounds/projectBackground.jpg) no-repeat center / cover;
+    background: url(./../../public/images/backgrounds/applicationBackground.jpg) no-repeat center / cover;
     min-height: 100vh;
 }
 

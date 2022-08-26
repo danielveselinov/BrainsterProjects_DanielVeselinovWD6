@@ -16,13 +16,8 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        // take only project that user have applied for
-        $projects = Project::all();
-
-        dd($projects->applications);
-
         return view('applications.index', [
-            'projects' => $projects
+            'applications' => Application::where('user_id', Auth::id())->latest()->get()
         ]);
     }
 
@@ -102,6 +97,12 @@ class ApplicationController extends Controller
      */
     public function destroy(Application $application)
     {
-        //
+        if (Auth::id() != $application->user_id) {
+            return to_route('applications.index')->with(['status' => true, 'message' => 'Can\'t delete someone else\'s application']);
+        }
+
+        $application->delete();
+
+        return to_route('applications.index')->with(['status' => true, 'message' => 'Application successfully deleted']);
     }
 }

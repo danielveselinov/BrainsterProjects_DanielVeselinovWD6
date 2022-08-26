@@ -23,6 +23,6 @@ class Project extends Model
 
     public function applications()
     {
-        return $this->belongsToMany(Application::class, 'project_id');
+        return $this->hasMany(Application::class, 'project_id');
     }
 }
