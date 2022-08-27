@@ -78,3 +78,18 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+    <script>
+        $(function() {
+            $('body').on('click', '#show_more', function(e) {
+                e.preventDefault()
+
+                let id = $(this).attr('data-id')
+
+                $(`#short_bio${id}`).fadeOut()
+                $(`#long_bio${id}`).fadeIn()
+            })
+        })
+    </script>
+@endsection

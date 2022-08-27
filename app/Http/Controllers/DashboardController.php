@@ -11,7 +11,7 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-        $projects = Project::latest()->paginate(8);
+        $projects = Project::latest()->where('assembled', 0)->paginate(8);
 
         if($request->ajax()){
             return view('components.project-sandbox', [
@@ -26,5 +26,19 @@ class DashboardController extends Controller
                 'academies' => Academy::all()
             ]);
         }  
+    }
+
+    // when send data to this func,in ajax load from components..
+    public function filter(Request $request)
+    {
+
+        return $request->academy_id;
+
+        // $projects = Project::whereRaw('SELECT * FROM academy_project')
+
+        // $projects = Project::with('academies')
+        //             ->latest()
+        //             ->where('assembled', 0)
+        //             ->paginate(8);
     }
 }

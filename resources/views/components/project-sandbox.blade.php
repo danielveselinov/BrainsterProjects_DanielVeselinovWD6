@@ -33,7 +33,7 @@
                     <button {{ (Auth::id() == $project->user->id) ? 'disabled' : '' }} {{ (Auth::user()->completed) ? '' : 'disabled' }} class="btn bg-green text-light text-uppercase mt-4 w-50 ms-md-auto">I'm in</button>
                 </div>
             </div>
-            <div class="position-absolute card-circle bg-green text-white fw-semibold">10<br>Applicants</div>
+            <div id="apps_count{{ $project->id }}" data-count="{{ $project->applications->count() }}" class="position-absolute card-circle bg-green text-white fw-semibold">{{ $project->applications->count() }}<br>Applicants</div>
         </div>
     </div>
 </div>

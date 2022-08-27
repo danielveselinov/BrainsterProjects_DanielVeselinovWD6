@@ -20,9 +20,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () { return to_route('login'); });
 Route::middleware(['auth'])->group(function() {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::post('filter', [DashboardController::class, 'filter'])->name('dashboard.filter');
     Route::resource('profile', ProfileController::class)->except(['create', 'store', 'edit', 'destroy']);
     Route::resource('projects', ProjectController::class)->except(['show'])->middleware(['completed']); 
-    Route::resource('applications', ApplicationController::class)->except(['create'])->middleware(['completed']); 
+    Route::resource('applications', ApplicationController::class)->except(['create', 'update', 'edit'])->middleware(['completed']); 
 });
 
 require __DIR__.'/auth.php';

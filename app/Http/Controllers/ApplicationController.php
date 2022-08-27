@@ -46,7 +46,6 @@ class ApplicationController extends Controller
         }
 
         return response()->json('error', 400);
-
     }
 
     /**
@@ -64,29 +63,6 @@ class ApplicationController extends Controller
         return view('applications.show', [
             'projects' => $application
         ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Application  $application
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Application $application)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Application  $application
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Application $application)
-    {
-        //
     }
 
     /**

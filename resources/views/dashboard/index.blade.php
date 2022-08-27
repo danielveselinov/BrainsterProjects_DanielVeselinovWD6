@@ -13,7 +13,7 @@
                 </div>
                 @foreach ($academies as $academy)
                 <div class="col-md-6">
-                    <button id="a{{ $academy->id }}" data-academy="{{ $academy->id }}" class="btn btn-light text-dark fw-semibold shadow-sm w-100">{{ $academy->name }}</button>
+                    <button id="a{{ $academy->id }}" data-academy="{{ $academy->id }}" class="btn btn-light text-dark fw-semibold shadow-sm w-100 set-filter-academy">{{ $academy->name }}</button>
                 </div>
                 @endforeach
             </div>
@@ -86,6 +86,34 @@
 @section('scripts')
 <script>
     $(function() {
+
+        $('body').on('click', '.set-filter-academy', function(e) {
+            e.preventDefault()
+
+            let academy_id = $(this).attr('data-academy')
+
+            // alert(academy_id)
+
+            $.post('filter', {
+                '_token': $('meta[name="csrf-token"]').attr('content'), academy_id
+            }).then(response => {
+                console.log(response)
+            }).catch(err => {
+                console.log(err)
+            })
+            
+
+        })
+
+        $('#allAcademies').on('click' , function(e) {
+            e.preventDefault()
+
+            let url = window.location.href
+            
+            $.get(url, function(data) {
+                $('#projects').html(data)
+            })
+        })
 
         $('body').on('click', '.pagination a', function(e) {
             e.preventDefault()
