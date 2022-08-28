@@ -36,7 +36,8 @@ class DashboardController extends Controller
         //SELECT `projects`.*, `academy_project`.`academy_id`, `academy_project`.`project_id` FROM `projects` JOIN `academy_project` ON `projects`.`id` = `academy_project`.`project_id` JOIN `academies` on `academy_project`.`academy_id` = `academies`.`id` WHERE `academy_project`.`academy_id` = 2
 
         $projects = Project::all();
-        
+
+        // koga ke selektira marketing, togaj ode u akademii, gi zema site proekti so imat marketing
         
 
         // return $projects->profiles;
