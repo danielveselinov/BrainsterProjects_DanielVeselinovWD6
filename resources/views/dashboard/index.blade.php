@@ -98,6 +98,7 @@
                 '_token': $('meta[name="csrf-token"]').attr('content'), academy_id
             }).then(response => {
                 console.log(response)
+                $('#projects').html(response)
             }).catch(err => {
                 console.log(err)
             })

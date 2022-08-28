@@ -6,6 +6,7 @@ use App\Models\Academy;
 use App\Models\Project;
 use App\Models\Skill;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -32,18 +33,20 @@ class DashboardController extends Controller
     public function filter(Request $request)
     {
 
-        // return $request->academy_id;
+        //SELECT `projects`.*, `academy_project`.`academy_id`, `academy_project`.`project_id` FROM `projects` JOIN `academy_project` ON `projects`.`id` = `academy_project`.`project_id` JOIN `academies` on `academy_project`.`academy_id` = `academies`.`id` WHERE `academy_project`.`academy_id` = 2
 
+        $projects = Project::all();
+        
+        
 
-        $projects = Academy::where('id', $request->academy_id)->get();
+        // return $projects->profiles;
 
-        return $projects->projects;
-
-        // $projects = Project::whereRaw('SELECT * FROM academy_project')
-
-        // $projects = Project::with('academies')
-        //             ->latest()
-        //             ->where('assembled', 0)
-        //             ->paginate(8);
+        // if($request->ajax()){
+        //     return view('components.project-filter', [
+        //         'projects' => $projects,
+        //         'skills' => Skill::all(),
+        //         'academies' => Academy::all()
+        //     ]);
+        // }
     }
 }
