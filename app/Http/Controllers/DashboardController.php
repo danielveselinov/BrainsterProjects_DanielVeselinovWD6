@@ -32,7 +32,12 @@ class DashboardController extends Controller
     public function filter(Request $request)
     {
 
-        return $request->academy_id;
+        // return $request->academy_id;
+
+
+        $projects = Academy::where('id', $request->academy_id)->get();
+
+        return $projects->projects;
 
         // $projects = Project::whereRaw('SELECT * FROM academy_project')
 

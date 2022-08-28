@@ -10,4 +10,9 @@ class Academy extends Model
     use HasFactory;
 
     protected $table = 'academies';
+
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
 }
