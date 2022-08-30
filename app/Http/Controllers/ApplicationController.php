@@ -77,6 +77,12 @@ class ApplicationController extends Controller
                         ->where('project_id', '=', $request->application)
                         ->update(['accepted' => 1]);
 
+        DB::table('applications')
+                        ->whereNotIn('user_id', ...[$request->applicantArr])
+                        ->where('project_id', '=', $request->application)
+                        ->update(['accepted' => 0]);
+
+
         return response()->json(['auth' => true, 'message' => 'Team successfully assembled']);
     }
 

@@ -53,9 +53,11 @@
 <script>
     $(() => {
         let applicantArr = []
-
+        
         $("[name='applicantFilter']").bind('click', function() {
             let filter = $(this).attr('data-user')
+
+            $(this).prop('disabled', true)
 
             if ($(this).is(':checked')) {
                 $(`#card${filter}`).addClass('bg-active')
