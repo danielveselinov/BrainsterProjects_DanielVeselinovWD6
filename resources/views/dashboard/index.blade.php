@@ -9,7 +9,7 @@
             <p class="fs-5 fw-semibold">In what field can you be amazing?</p>
             <div class="row g-3 filters">
                 <div class="col-md-6">
-                    <button id="allAcademies" class="btn btn-active text-white fw-semibold w-100">All</button>
+                    <button id="allAcademies" class="btn btn-active text-white fw-semibold shadow-sm w-100">All</button>
                 </div>
                 @foreach ($academies as $academy)
                 <div class="col-md-6">
@@ -89,13 +89,19 @@
         $('body').on('click', '.set-filter-academy', function(e) {
             e.preventDefault()
 
+            let academy_id = $(this).attr('data-academy')
+
             $('#projects').html(`<div class="text-center mt-5">
                     <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
                         <span class="visually-hidden">Loading...</span>
                     </div>
                 </div>`)
 
-            let academy_id = $(this).attr('data-academy')
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected')
+            } else {
+                $(this).addClass('selected')
+            }
 
             $.post('filter', {
                 '_token': $('meta[name="csrf-token"]').attr('content'),
@@ -109,6 +115,14 @@
 
         $('#allAcademies').on('click', function(e) {
             e.preventDefault()
+
+            if ($(this).hasClass('btn-active text-white')) {
+                $('.set-filter-academy').each(function() {
+                    $(this).removeClass('selected')
+                })
+            } else {
+                $(this).addClass('btn-active text-white')
+            }
 
             $('#projects').html(`<div class="text-center mt-5">
                     <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">

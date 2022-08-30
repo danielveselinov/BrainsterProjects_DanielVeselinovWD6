@@ -72,6 +72,11 @@
     background-color: #48695c !important;
 }
 
+.set-filter-academy.selected {
+    color: #f6f6f6 !important;
+    background-color: #48695c !important;
+}
+
 .small-xl {
     font-size: 10px !important;
 }

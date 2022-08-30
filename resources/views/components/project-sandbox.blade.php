@@ -1,4 +1,10 @@
 @forelse ($projects as $project)
+@php
+$korisnik = [];
+foreach ($project->applications as $profil) {
+array_push($korisnik, $profil->user_id);
+}
+@endphp
 <div class="card mt-5 mb-4 position-relative">
     <div class="row g-0">
         <div class="col-md-3 pt-3">
@@ -30,7 +36,7 @@
                         {{ $project->description }}
                         @endif
                     </div>
-                    <button {{ (Auth::id() == $project->user->id) ? 'disabled' : '' }} {{ (Auth::user()->completed) ? '' : 'disabled' }} class="btn bg-green text-light text-uppercase mt-4 w-50 ms-md-auto">I'm in</button>
+                    <button data-project="{{ $project->id }}" {{ in_array(Auth::id(), $korisnik) ? 'disabled' : '' }} {{ (Auth::id() == $project->user->id) ? 'disabled' : '' }} {{ (Auth::user()->completed) ? '' : 'disabled' }} class="btn bg-green text-light text-uppercase mt-4 w-50 ms-md-auto imInBtn">I'm in</button>
                 </div>
             </div>
             <div id="apps_count{{ $project->id }}" data-count="{{ $project->applications->count() }}" class="position-absolute card-circle bg-green text-white fw-semibold">{{ $project->applications->count() }}<br>Applicants</div>
