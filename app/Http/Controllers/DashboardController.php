@@ -29,25 +29,19 @@ class DashboardController extends Controller
         }  
     }
 
-    // when send data to this func,in ajax load from components..
     public function filter(Request $request)
     {
+        $projects = Project::with('profiles')
+                        ->where('assembled', 0)
+                        ->whereRelation('profiles', 'academy_id', '=', $request->academy_id)
+                        ->latest()->paginate(8);
 
-        //SELECT `projects`.*, `academy_project`.`academy_id`, `academy_project`.`project_id` FROM `projects` JOIN `academy_project` ON `projects`.`id` = `academy_project`.`project_id` JOIN `academies` on `academy_project`.`academy_id` = `academies`.`id` WHERE `academy_project`.`academy_id` = 2
-
-        $projects = Project::all();
-
-        // koga ke selektira marketing, togaj ode u akademii, gi zema site proekti so imat marketing
-        
-
-        // return $projects->profiles;
-
-        // if($request->ajax()){
-        //     return view('components.project-filter', [
-        //         'projects' => $projects,
-        //         'skills' => Skill::all(),
-        //         'academies' => Academy::all()
-        //     ]);
-        // }
+        if($request->ajax()){
+            return view('components.project-filter', [
+                'projects' => $projects,
+                'skills' => Skill::all(),
+                'academies' => Academy::all()
+            ]);
+        }
     }
 }

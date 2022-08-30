@@ -25,13 +25,12 @@
                 <p class="fs-5 fw-semibold">Checkout the latest projects</p>
             </div>
 
-            
             <div class="row g-2" id="projects">
                 @forelse ($projects as $project)
                 @php
                 $korisnik = [];
-                foreach ($project->applications as $profil) { 
-                    array_push($korisnik, $profil->user_id); 
+                foreach ($project->applications as $profil) {
+                array_push($korisnik, $profil->user_id);
                 }
                 @endphp
                 <div class="card mt-5 mb-4 position-relative">
@@ -90,27 +89,35 @@
         $('body').on('click', '.set-filter-academy', function(e) {
             e.preventDefault()
 
+            $('#projects').html(`<div class="text-center mt-5">
+                    <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>`)
+
             let academy_id = $(this).attr('data-academy')
 
-            // alert(academy_id)
-
             $.post('filter', {
-                '_token': $('meta[name="csrf-token"]').attr('content'), academy_id
+                '_token': $('meta[name="csrf-token"]').attr('content'),
+                academy_id
             }).then(response => {
-                console.log(response)
                 $('#projects').html(response)
             }).catch(err => {
                 console.log(err)
             })
-            
-
         })
 
-        $('#allAcademies').on('click' , function(e) {
+        $('#allAcademies').on('click', function(e) {
             e.preventDefault()
 
+            $('#projects').html(`<div class="text-center mt-5">
+                    <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>`)
+
             let url = window.location.href
-            
+
             $.get(url, function(data) {
                 $('#projects').html(data)
             })
@@ -118,6 +125,12 @@
 
         $('body').on('click', '.pagination a', function(e) {
             e.preventDefault()
+
+            $('#projects').html(`<div class="text-center mt-5">
+                    <div class="spinner-grow" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>`)
 
             let url = $(this).attr('href')
 
@@ -139,7 +152,7 @@
             e.preventDefault()
 
             let id = $(this).attr('data-project')
-            
+
             Swal.fire({
                 title: 'Apply for a project',
                 html: `
@@ -164,7 +177,8 @@
                         url: 'applications',
                         data: {
                             '_token': $('meta[name="csrf-token"]').attr('content'),
-                            project_id, description
+                            project_id,
+                            description
                         },
                         success: (response) => {
                             if (response === 'success') {
