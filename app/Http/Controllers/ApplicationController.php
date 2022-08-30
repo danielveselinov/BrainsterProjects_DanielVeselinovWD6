@@ -6,6 +6,7 @@ use App\Models\Application;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ApplicationController extends Controller
 {
@@ -63,6 +64,20 @@ class ApplicationController extends Controller
         return view('applications.show', [
             'projects' => $application
         ]);
+    }
+
+    public function update(Request $request)
+    {
+        DB::table('projects')
+                        ->where('id', '=', $request->application)
+                        ->update(['assembled' => 1]);
+        
+        DB::table('applications')
+                        ->whereIn('user_id', ...[$request->applicantArr])
+                        ->where('project_id', '=', $request->application)
+                        ->update(['accepted' => 1]);
+
+        return response()->json(['auth' => true, 'message' => 'Team successfully assembled']);
     }
 
     /**

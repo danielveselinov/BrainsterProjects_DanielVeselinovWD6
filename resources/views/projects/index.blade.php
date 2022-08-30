@@ -65,7 +65,11 @@
                                 </div>
                             </div>
                         </div>
+                        @if ($project->assembled)
+                        <div class="position-absolute card-circle bg-green text-white text-decoration-none pointer fw-semibold">{{ $project->applications->count() }}<br>Applicants</div>
+                        @else
                         <a href="{{ route('applications.show', $project->id) }}" class="position-absolute card-circle bg-green text-white text-decoration-none pointer fw-semibold">{{ $project->applications->count() }}<br>Applicants</a>
+                        @endif
                     </div>
                 </div>
                 @if ($project->assembled)

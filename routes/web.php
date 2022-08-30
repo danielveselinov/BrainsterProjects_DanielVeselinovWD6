@@ -23,7 +23,7 @@ Route::middleware(['auth'])->group(function() {
     Route::post('filter', [DashboardController::class, 'filter'])->name('dashboard.filter');
     Route::resource('profile', ProfileController::class)->except(['create', 'store', 'edit', 'destroy']);
     Route::resource('projects', ProjectController::class)->except(['show'])->middleware(['completed']); 
-    Route::resource('applications', ApplicationController::class)->except(['create', 'update', 'edit'])->middleware(['completed']); 
+    Route::resource('applications', ApplicationController::class)->except(['create', 'edit'])->middleware(['completed']); 
 });
 
 require __DIR__.'/auth.php';
