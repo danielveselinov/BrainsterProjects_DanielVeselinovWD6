@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Applied;
 use App\Models\Application;
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -41,7 +43,14 @@ class ApplicationController extends Controller
          ]);
 
         if($application) {
-            // event(new InvitationEvent($user, $token));
+
+            $applicant = Auth::user();
+
+            $owner = User::with('projects')
+                            ->whereRelation('projects', 'id', '=', $request->project_id)
+                            ->first();
+
+            event(new Applied($applicant, $owner, $request->description));
 
             return response()->json('success');
         }
