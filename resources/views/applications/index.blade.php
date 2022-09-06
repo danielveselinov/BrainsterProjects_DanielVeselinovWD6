@@ -67,7 +67,7 @@
                             <p class="mb-0 text-red small fw-semibold">Application declined</p>
                             <img src="{{ asset('images/icons/6.png') }}" width="20" height="20" alt="...">
                         @endif
-                        <div class="position-absolute card-circle bg-green text-white text-decoration-none pointer fw-semibold">{{ $application->project->count() }}<br>Applicants</div>
+                        <div class="position-absolute card-circle bg-green text-white text-decoration-none pointer fw-semibold">{{ $application->project->applications->count() }}<br>Applicants</div>
                     </div>
                 </div>
             </div>
