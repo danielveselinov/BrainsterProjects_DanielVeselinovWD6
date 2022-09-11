@@ -100,7 +100,7 @@
         </div>
 
         <div class="col-12 text-end">
-            <button type="submit" class="btn text-white text-uppercase fw-semibold bg-green btn-xl mb-3 mb-lg-0">EDIT</button>
+            <button type="submit" class="btn text-white text-uppercase fw-semibold bg-green btn-xl mb-3 mb-lg-0">EDIT / UPDATE</button>
         </div>
     </form>
 </div>
