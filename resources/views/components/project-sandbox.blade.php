@@ -44,7 +44,9 @@ array_push($korisnik, $profil->user_id);
     </div>
 </div>
 @empty
-<p class="text-gray">Nothing found!</p>
+<div class="alert alert-secondary shadow" role="alert">
+    Nothing found!
+</div>
 @endforelse
 
 {!! $projects->links() !!}
