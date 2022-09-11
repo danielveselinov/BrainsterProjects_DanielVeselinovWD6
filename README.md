@@ -76,6 +76,6 @@ This is how you can set up this project locally. To get a local copy up and runn
     ```
     php artisan queue:work
     ```
-    - so the jobs could be processed in the background
+    so the jobs could be processed in the background
 
 13. Access the project at http://localhost:8000/ or the custom port that you set up
