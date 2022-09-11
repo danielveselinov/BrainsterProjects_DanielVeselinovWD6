@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('academy_id')->nullable();
+            $table->foreign('academy_id')->references('id')->on('academies');
             $table->string('name');
             $table->string('surname');
             $table->text('biography');
@@ -26,7 +27,6 @@ return new class extends Migration
             $table->boolean('completed')->default(0);
             $table->rememberToken();
             $table->timestamps();
-            $table->foreign('academy_id')->references('id')->on('academies');
         });
     }
 
