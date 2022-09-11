@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <div class="row py-4">
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-8 col-lg-6">
             <h1 class="fw-bolder mb-3">Register</h1>
 
             <form action="#" method="POST" class="row g-2">

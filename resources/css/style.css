@@ -175,3 +175,41 @@
 .pagination .page-link {
     color: #000000 !important;
 }
+
+@media (max-width: 1024px) {
+    #login {
+        min-height: 100vh !important;
+    }
+    
+    #register {
+        min-height: 100vh !important;
+    }
+    
+    #dashboard {
+        min-height: 100vh !important;
+    }
+    
+    #project {
+        min-height: 100vh !important;
+    }
+    
+    #application {
+        min-height: 100vh !important;
+    }
+
+    .vh-100.vh-custom {
+        height: auto !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .custom-option {
+        margin-bottom: -100px !important;
+    }
+
+    .options {
+        display: none;
+        bottom: 50px !important;
+        right: 10px !important;
+    }
+}

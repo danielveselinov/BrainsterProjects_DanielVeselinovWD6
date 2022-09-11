@@ -26,7 +26,7 @@
         <div class="col-12 col-md-8 offset-md-2 mt-4">
             <div class="row justify-content-center py-4">
                 @forelse ($projects->applications as $aplikant)
-                <div class="col-12 col-md-4">
+                <div class="col-12 col-md-6 col-lg-4 mb-4">
                     <div class="card rounded-4 border-0 shadow-sm" id="card{{ $aplikant->user->id }}">
                         <div class="card-body text-center">
                             <img src="{{ $aplikant->user->setAvatar() }}" class="rounded-circle bg-body p-2 shadow-sm card-image" width="130" height="130" alt="...">

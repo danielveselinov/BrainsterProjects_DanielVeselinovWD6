@@ -39,7 +39,7 @@
                     foreach ($project->profiles as $profil) { array_push($akademii, $profil->id); }
                 @endphp
                 @foreach ($academies as $academy)
-                <div class="col-2">
+                <div class="col-4 col-sm-2">
                     <input type="checkbox" class="form-check-input d-none" name="academy[]" value="{{ $academy->id }}" id="academy{{ $academy->id }}" {{ (in_array($academy->id, $akademii)) ? 'checked' : '' }}>
                     <label id="academy{{ $academy->id }}" class="form-check-box d-flex flex-column align-items-center justify-content-center {{ (in_array($academy->id, $akademii)) ? 'bg-green text-white' : 'bg-light' }} shadow-sm small border rounded-2 m-1" for="academy{{ $academy->id }}">
                         {{ $academy->name }}

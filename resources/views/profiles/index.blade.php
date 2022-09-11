@@ -67,7 +67,7 @@
                         }
                         @endphp
                         @foreach ($skills as $skill)
-                        <div class="col-2">
+                        <div class="col-4 col-sm-2">
                             <input type="checkbox" class="form-check-input d-none" name="skill[]" value="{{ $skill->id }}" id="skill{{ $skill->id }}" {{ (in_array($skill->id, $vestini)) ? 'checked' : '' }}>
                             <label id="skill{{ $skill->id }}" class="form-check-box d-flex flex-column align-items-center justify-content-center {{ (in_array($skill->id, $vestini)) ? 'bg-green text-white' : 'bg-light' }} shadow-sm small border rounded-2 m-1" for="skill{{ $skill->id }}">
                                 {{ $skill->name }}

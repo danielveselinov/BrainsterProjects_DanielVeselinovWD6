@@ -16,11 +16,11 @@
             </a>
         </div>
 
-        <div class="col-12 col-md-8 offset-md-2 mt-4">
+        <div class="col-12 col-lg-8 offset-lg-2 mt-4">
             @forelse ($projects as $project)
             <div class="card mt-5 mb-4 position-relative">
                 @if (!$project->assembled)
-                <a href="{{ route('projects.edit', $project->id) }}" class="position-absolute options">
+                <a href="{{ route('projects.edit', $project->id) }}" class="position-absolute options custom-option">
                     <img src="{{ asset('images/icons/8.png') }}" width="40" height="40" alt="...">
                 </a>
                 <form action="{{ route('projects.destroy', $project->id) }}" method="POST" class="position-absolute options">

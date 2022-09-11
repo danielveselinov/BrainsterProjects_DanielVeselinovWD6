@@ -35,7 +35,7 @@
             <p class="fs-4 text-gray fw-semibold mt-5 mb-0">Skills:</p>
             <div class="row g-0" style="overflow-y: auto;">
                 @foreach ($user->skills as $skill)
-                <div class="col-2">
+                <div class="col-4 col-sm-2">
                     <label class="form-check-box d-flex flex-column align-items-center justify-content-center bg-light bg-light shadow-sm small border rounded-2 m-1">
                         {{ $skill->name }}
                     </label>

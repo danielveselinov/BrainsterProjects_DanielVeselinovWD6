@@ -13,7 +13,7 @@
         </div>
 
         @forelse ($applications as $application)
-        <div class="col-12 col-md-8 offset-md-2 mt-4">
+        <div class="col-12 col-lg-8 offset-lg-2 mt-4">
             <div class="card mt-5 mb-4 position-relative">
                 @if (!$application->accepted)
                 <form action="{{ route('applications.destroy', $application->id) }}" method="POST" class="position-absolute options" style="right: -40px !important">

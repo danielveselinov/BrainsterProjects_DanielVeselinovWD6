@@ -5,15 +5,15 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-12 col-md-8">
-            <div class="d-flex flex-column justify-content-center vh-100">
+        <div class="col-12 col-lg-8">
+            <div class="d-flex flex-column justify-content-center vh-100 vh-custom">
                 <p class="fw-bold fs-1 mb-5"><span class="text-black">BRAINSTER</span><span class="text-gray">PRENEURS</span></p>
                 <p class="fs-4 fw-semibold">Propel your ides to life!</p>
             </div>
         </div>
 
-        <div class="col-12 col-md-4">
-            <form action="{{ route('login') }}" method="POST" class="d-flex flex-column justify-content-center vh-100">
+        <div class="col-12 col-lg-4 mt-5 mt-lg-0">
+            <form action="{{ route('login') }}" method="POST" class="d-flex flex-column justify-content-center vh-100 vh-custom">
                 @csrf
                 @method('POST')
                 <div class="h1 fw-bolder">Login</div>
